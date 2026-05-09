@@ -1,0 +1,7 @@
+build/
+.zed/
+.cache/
+
+.clang*
+compile_commands.json
+.todo.md
