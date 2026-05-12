@@ -2,8 +2,7 @@
 #define IOVERLAY_HPP
 
 #include <QList>
-
-class QString;
+#include <QString>
 
 namespace overlays {
 

@@ -9,7 +9,6 @@
 #include <QSpinBox>
 #include <QVBoxLayout>
 
-#include "overlays/FPSOverlay.hpp"
 #include "overlays/IOverlay.hpp"
 
 namespace ui {

@@ -1,51 +1,13 @@
 #include "render/RenderScheduler.hpp"
 
-#include <vtkRenderWindow.h>
 #include <vtkResliceImageViewer.h>
 
 #include <algorithm>
 
-#include "render/IRenderTarget.hpp"
+#include "render/RivRenderTarget.hpp"
+#include "render/WindowRenderTarget.hpp"
 
 namespace render {
-
-// ── Concrete targets (private to this translation unit) ───────────────────────
-
-// Plain window target — used in multi-window mode and for the shared window
-// in viewport mode. Calls renderWindow->Render() directly.
-class WindowRenderTarget final : public IRenderTarget {
-  public:
-    explicit WindowRenderTarget(vtkRenderWindow* window)
-        : IRenderTarget(window) {}
-
-    void ExecuteRender() override {
-        if (m_window)
-            m_window->Render();
-    }
-};
-
-// RIV-backed target — calls riv->Render() first so the reslice pipeline
-// (UpdateDisplayExtent / NeedToRenderOn / BuildRepresentation) runs before
-// the window composite, then calls renderWindow->Render() for the final frame.
-// Without the riv->Render() step, image actors can show a blank viewport
-// because the display extent is stale.
-class RivRenderTarget final : public IRenderTarget {
-  public:
-    explicit RivRenderTarget(vtkResliceImageViewer* riv)
-        : IRenderTarget(riv->GetRenderWindow()), m_riv(riv) {}
-
-    void ExecuteRender() override {
-        if (m_riv)
-            m_riv->Render();
-        if (m_window)
-            m_window->Render();
-    }
-
-  private:
-    vtkResliceImageViewer* m_riv{nullptr};  // weak — owned by SliceController
-};
-
-// ── RenderScheduler ───────────────────────────────────────────────────────────
 
 RenderScheduler::RenderScheduler() = default;
 

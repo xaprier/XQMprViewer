@@ -4,13 +4,14 @@
 #include <QColor>
 #include <QWidget>
 
+#include "overlays/FPSOverlay.hpp"  // included because it's used in QList
+
 class QCheckBox;
 class QComboBox;
 class QPushButton;
 class QSpinBox;
 
 namespace overlays {
-class FPSOverlay;
 enum class OverlayPosition;
 }  // namespace overlays
 
@@ -51,7 +52,6 @@ class ControllerPanelFPSOverlayItem : public QWidget {
 
   private:
     void _setupUi();
-    void _applyToAll();
 
     void _onEnabledToggled(bool checked);
     void _onPositionChanged(int index);

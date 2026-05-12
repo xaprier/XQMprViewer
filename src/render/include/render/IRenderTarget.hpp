@@ -1,8 +1,6 @@
 #ifndef RENDER_IRENDERTARGET_HPP
 #define RENDER_IRENDERTARGET_HPP
 
-#include "render/RenderTypes.hpp"
-
 class vtkRenderWindow;
 
 namespace render {

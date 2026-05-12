@@ -1,7 +1,6 @@
 #include "overlays/IOverlay.hpp"
 
 #include <QObject>
-#include <QString>
 
 namespace overlays {
 QString QStringFromOverlayPosition(const OverlayPosition& pos) {
