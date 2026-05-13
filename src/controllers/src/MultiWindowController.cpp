@@ -44,6 +44,7 @@ void MultiWindowController::_Initialize(const std::vector<QVTKOpenGLNativeWidget
     m_sliceController->Initialize(m_vtkWidgets, m_scheduler.get());
 
     m_initialized = true;
+    emit ViewersReady();
 }
 
 void MultiWindowController::_AddSphere() {

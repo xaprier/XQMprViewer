@@ -109,6 +109,19 @@ class IViewController : public IControllerBase {
         b = m_sphereColor[2];
     }
 
+    /** @brief Returns the slice controller (valid after Initialize()). May be null for ViewportController until first image load. */
+    SliceController* GetSliceController() const { return m_sliceController.get(); }
+
+  Q_SIGNALS:
+    /**
+     * @brief Emitted once the vtkResliceImageViewer instances are created and ready.
+     *
+     * MultiWindowController emits this at the end of _Initialize().
+     * ViewportController emits this inside _SetupPipeline() (first image load).
+     * Connect to this signal to safely call GetSliceController()->GetViewers().
+     */
+    void ViewersReady();
+
   public slots:
     /** @brief Pushes @p data into every registered controller instance. No-op if @p data is null. */
     void SetImageData(vtkImageData* data) {

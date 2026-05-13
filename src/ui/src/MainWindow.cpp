@@ -13,8 +13,9 @@
 #include "adapters/ColorAdapter.hpp"
 #include "controllers/DicomController.hpp"
 #include "controllers/MultiWindowController.hpp"
-#include "overlays/FPSOverlay.hpp"
+#include "overlays/CornerAnnotationOverlay.hpp"
 #include "ui/ControllerPanel.hpp"
+#include "ui/ControllerPanelCornerAnnotationItem.hpp"
 #include "ui/ControllerPanelSphereItem.hpp"
 #include "ui/MultiWindowView.hpp"
 #include "ui/ViewportView.hpp"
@@ -46,6 +47,14 @@ void MainWindow::_BuildUi() {
 
     _BuildViewportTab();
     _BuildMultiWindowTab();
+
+    // Register all corner annotation overlays with the controller panel item
+    // so their initial settings are applied immediately.
+    auto* caItem = m_controllerPanel->GetCornerAnnotationItem();
+    for (auto* ov : m_viewportView->GetOverlays<overlays::CornerAnnotationOverlay>())
+        caItem->AddOverlay(ov);
+    for (auto* ov : m_multiWindowView->GetOverlays<overlays::CornerAnnotationOverlay>())
+        caItem->AddOverlay(ov);
 
     statusBar()->showMessage("Ready to load DICOM series.");
 }
@@ -106,50 +115,61 @@ void MainWindow::_ConnectSignals() {
     connect(m_dicomController, &controllers::DicomController::ImageDataReady,
             m_multiWindowView->GetController(), &controllers::MultiWindowController::SetImageData);
 
-    // FPSOverlay connections
     connect(m_controllerPanel, &ControllerPanel::FPSOverlayEnableChanged, this, [this](bool enabled) {
-        for (auto* overlay : m_viewportView->GetFPSOverlays()) {
-            overlay->SetEnabled(enabled);
-        }
-        for (auto* overlay : m_multiWindowView->GetFPSOverlays()) {
-            overlay->SetEnabled(enabled);
-        }
+        _ForEachOverlay<overlays::FPSOverlay>([enabled](auto* ov) { ov->SetEnabled(enabled); });
     });
-
     connect(m_controllerPanel, &ControllerPanel::FPSOverlayColorChanged, this, [this](const QColor& color) {
-        for (auto* overlay : m_viewportView->GetFPSOverlays()) {
-            overlay->SetTextColor(color);
-        }
-        for (auto* overlay : m_multiWindowView->GetFPSOverlays()) {
-            overlay->SetTextColor(color);
-        }
+        _ForEachOverlay<overlays::FPSOverlay>([&color](auto* ov) { ov->SetTextColor(color); });
     });
-
     connect(m_controllerPanel, &ControllerPanel::FPSOverlayPositionChanged, this, [this](const overlays::OverlayPosition& position) {
-        for (auto* overlay : m_viewportView->GetFPSOverlays()) {
-            overlay->SetPosition(position);
-        }
-        for (auto* overlay : m_multiWindowView->GetFPSOverlays()) {
-            overlay->SetPosition(position);
-        }
+        _ForEachOverlay<overlays::FPSOverlay>([&position](auto* ov) { ov->SetPosition(position); });
     });
-
     connect(m_controllerPanel, &ControllerPanel::FPSOverlayMarginChanged, this, [this](int margin) {
-        for (auto* overlay : m_viewportView->GetFPSOverlays()) {
-            overlay->SetMargin(margin);
-        }
-        for (auto* overlay : m_multiWindowView->GetFPSOverlays()) {
-            overlay->SetMargin(margin);
-        }
+        _ForEachOverlay<overlays::FPSOverlay>([margin](auto* ov) { ov->SetMargin(margin); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::FPSOverlayFontSizeChanged, this, [this](int fontSize) {
+        _ForEachOverlay<overlays::FPSOverlay>([fontSize](auto* ov) { ov->SetFontSize(fontSize); });
     });
 
-    connect(m_controllerPanel, &ControllerPanel::FPSOverlayFontSizeChanged, this, [this](int fontSize) {
-        for (auto* overlay : m_viewportView->GetFPSOverlays()) {
-            overlay->SetFontSize(fontSize);
-        }
-        for (auto* overlay : m_multiWindowView->GetFPSOverlays()) {
-            overlay->SetFontSize(fontSize);
-        }
+    connect(m_controllerPanel, &ControllerPanel::OrientationMarkerEnableChanged, this, [this](bool enabled) {
+        _ForEachOverlay<overlays::OrientationMarkerOverlay>([enabled](auto* ov) { ov->SetEnabled(enabled); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::OrientationMarkerColorChanged, this, [this](const QColor& color) {
+        _ForEachOverlay<overlays::OrientationMarkerOverlay>([&color](auto* ov) { ov->SetTextColor(color); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::OrientationMarkerLongLabelsChanged, this, [this](bool longLabels) {
+        _ForEachOverlay<overlays::OrientationMarkerOverlay>([longLabels](auto* ov) { ov->SetLongLabels(longLabels); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::OrientationMarkerFontSizeChanged, this, [this](int fontSize) {
+        _ForEachOverlay<overlays::OrientationMarkerOverlay>([fontSize](auto* ov) { ov->SetFontSize(fontSize); });
+    });
+
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationEnableChanged, this, [this](bool enabled) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([enabled](auto* ov) { ov->SetEnabled(enabled); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationPositionChanged, this, [this](const overlays::OverlayPosition& position) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([&position](auto* ov) { ov->SetPosition(position); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationColorChanged, this, [this](const QColor& color) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([&color](auto* ov) { ov->SetTextColor(color); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationFontSizeChanged, this, [this](int fontSize) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([fontSize](auto* ov) { ov->SetFontSize(fontSize); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationMarginChanged, this, [this](int margin) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([margin](auto* ov) { ov->SetMargin(margin); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationShowSliceInfoChanged, this, [this](bool show) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([show](auto* ov) { ov->SetShowSliceInfo(show); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationShowWindowLevelChanged, this, [this](bool show) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([show](auto* ov) { ov->SetShowWindowLevel(show); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationShowSpacingChanged, this, [this](bool show) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([show](auto* ov) { ov->SetShowSpacing(show); });
+    });
+    connect(m_controllerPanel, &ControllerPanel::CornerAnnotationShowViewNameChanged, this, [this](bool show) {
+        _ForEachOverlay<overlays::CornerAnnotationOverlay>([show](auto* ov) { ov->SetShowViewName(show); });
     });
 
     connect(m_viewportView, &ViewportView::StatusChanged, this, [this](const QString& message) {
@@ -162,6 +182,14 @@ void MainWindow::_ConnectSignals() {
 }
 void MainWindow::_Notification(const QString& message) {
     statusBar()->showMessage(message);
+}
+
+template <typename OverlayT, typename Fn>
+void MainWindow::_ForEachOverlay(Fn&& fn) {
+    for (auto* ov : m_viewportView->GetOverlays<OverlayT>())
+        fn(ov);
+    for (auto* ov : m_multiWindowView->GetOverlays<OverlayT>())
+        fn(ov);
 }
 
 }  // namespace ui

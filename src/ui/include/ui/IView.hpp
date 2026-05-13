@@ -10,9 +10,9 @@ class vtkGenericOpenGLRenderWindow;
 class vtkRenderWindowInteractor;
 class QVTKOpenGLNativeWidget;
 
-namespace overlays {
-class FPSOverlay;
-}
+#include "overlays/CornerAnnotationOverlay.hpp"
+#include "overlays/FPSOverlay.hpp"
+#include "overlays/OrientationMarkerOverlay.hpp"
 
 namespace ui {
 
@@ -22,6 +22,10 @@ namespace ui {
  * Subclasses own one or more QVTKOpenGLNativeWidget instances and implement
  * _setupUI() to lay them out. StatusChanged is forwarded from the
  * controller so the main window can show it in a status bar.
+ *
+ * GetOverlays<T>() provides a uniform accessor for any registered overlay type.
+ * To add a new overlay type: add a member vector and a GetOverlays<NewType>()
+ * specialisation here — no changes needed in MainWindow.
  */
 class IView : public QWidget {
     Q_OBJECT
@@ -29,10 +33,10 @@ class IView : public QWidget {
     explicit IView(QWidget* parent = nullptr) : QWidget(parent) {}
     ~IView() = default;
 
-    std::vector<overlays::FPSOverlay*>& GetFPSOverlays() { return m_fpsOverlays; }
+    template <typename T>
+    std::vector<T*>& GetOverlays();
 
   Q_SIGNALS:
-    /** @brief Forwarded from the underlying controller for status bar display. */
     void StatusChanged(const QString& message);
 
   protected:
@@ -40,7 +44,27 @@ class IView : public QWidget {
 
     std::vector<QVTKOpenGLNativeWidget*> m_vtkWidgets{};
     std::vector<overlays::FPSOverlay*> m_fpsOverlays{};
+    std::vector<overlays::OrientationMarkerOverlay*> m_orientationMarkerOverlays{};
+    std::vector<overlays::CornerAnnotationOverlay*> m_cornerAnnotationOverlays{};
 };
+
+template <>
+inline std::vector<overlays::FPSOverlay*>& IView::GetOverlays<overlays::FPSOverlay>() {
+    return m_fpsOverlays;
+}
+
+template <>
+inline std::vector<overlays::OrientationMarkerOverlay*>&
+IView::GetOverlays<overlays::OrientationMarkerOverlay>() {
+    return m_orientationMarkerOverlays;
+}
+
+template <>
+inline std::vector<overlays::CornerAnnotationOverlay*>&
+IView::GetOverlays<overlays::CornerAnnotationOverlay>() {
+    return m_cornerAnnotationOverlays;
+}
+
 }  // namespace ui
 
 #endif  // IVIEW_HPP

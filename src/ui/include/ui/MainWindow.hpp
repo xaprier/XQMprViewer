@@ -5,11 +5,18 @@
 
 #include <QMainWindow>
 
+#include "ui/IView.hpp"
+
 class QTabWidget;
 
 namespace controllers {
 class DicomController;
 }  // namespace controllers
+
+namespace overlays {
+class FPSOverlay;
+class OrientationMarkerOverlay;
+}  // namespace overlays
 
 namespace ui {
 
@@ -36,6 +43,16 @@ class MainWindow : public QMainWindow {
     void _BuildMultiWindowTab();
     void _ConnectSignals();
     void _Notification(const QString& message);
+
+    /**
+     * @brief Apply @p fn to every overlay of type @p OverlayT across both views.
+     *
+     * IView::GetOverlays<T>() dispatches to the correct vector based on T.
+     * Adding a new overlay type only requires adding a GetOverlays<T>()
+     * specialisation to IView — no changes needed here.
+     */
+    template <typename OverlayT, typename Fn>
+    void _ForEachOverlay(Fn&& fn);
 
     controllers::DicomController* m_dicomController{nullptr};
     QTabWidget* m_tabWidget{nullptr};

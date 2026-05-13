@@ -200,6 +200,8 @@ void ViewportController::_SetupPipeline(vtkImageData* imageData) {
                 m_sphereController.get(), &SphereController::SphereMoved,
                 m_sliceController.get(), &SliceController::OnSphereUpdated);
         }
+
+        emit ViewersReady();
     }
 
     m_sliceController->SetImageData(imageData);
