@@ -46,6 +46,16 @@ class ViewportInteractorStyle : public vtkInteractorStyleImage {
     void OnMouseWheelForward() override;
     void OnMouseWheelBackward() override;
 
+    /**
+     * @brief Propagates the active viewer's colour window/level to all other viewers.
+     *
+     * Called by the base class during a left-button drag.  After delegating to
+     * the superclass implementation, reads the updated colour window and level
+     * from the active viewer's image actor and applies them to every other viewer
+     * so all viewports stay visually consistent.
+     */
+    void WindowLevel() override;
+
   private:
     /** @brief Finds the viewer whose viewport contains the current cursor position. */
     bool _UpdateActiveViewer();
@@ -59,8 +69,6 @@ class ViewportInteractorStyle : public vtkInteractorStyleImage {
 
     vtkResliceImageViewer* m_activeViewer = nullptr;
     vtkRenderer* m_activeRenderer = nullptr;
-
-    bool m_windowLeveling = false;
 };
 }  // namespace controllers
 

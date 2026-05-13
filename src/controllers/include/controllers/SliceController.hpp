@@ -19,6 +19,8 @@ class RenderScheduler;
 
 namespace controllers {
 
+class ResliceImageViewerInteractorStyle;
+
 /**
  * @brief Manages up to three vtkResliceImageViewer instances for orthogonal slice display.
  *
@@ -86,7 +88,7 @@ class SliceController : public IControllerBase {
     void FitToView();
 
     vtkSmartPointer<vtkImageData> m_image;
-
+    vtkSmartPointer<ResliceImageViewerInteractorStyle> m_rivStyle;  // null in viewport mode
     std::vector<vtkSmartPointer<vtkResliceImageViewer>> m_rivs;
     std::vector<QVTKOpenGLNativeWidget*> m_vtkWidgets;
     render::RenderScheduler* m_scheduler{nullptr};  // non-owning, owned by IViewController

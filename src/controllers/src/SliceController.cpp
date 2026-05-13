@@ -7,6 +7,7 @@
 #include <vtkImageData.h>
 #include <vtkImageProperty.h>
 #include <vtkImageViewer2.h>
+#include <vtkInteractorStyleImage.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkRenderer.h>
@@ -15,6 +16,7 @@
 
 #include <algorithm>
 
+#include "controllers/ResliceImageViewerInteractorStyle.hpp"
 #include "render/RenderScheduler.hpp"
 
 namespace controllers {
@@ -42,6 +44,8 @@ void SliceController::SetupViewers() {
     m_rivs.reserve(3);
 
     bool viewportMode = (m_vtkWidgets.size() == 1);
+    if (!viewportMode)
+        m_rivStyle = vtkSmartPointer<ResliceImageViewerInteractorStyle>::New();
 
     for (size_t i = 0; i < 3; ++i) {
         QVTKOpenGLNativeWidget* widget = nullptr;
@@ -62,8 +66,24 @@ void SliceController::SetupViewers() {
         if (!viewportMode)
             riv->SetupInteractor(widget->interactor());
 
-        riv->SetSliceOrientation(kOrientations[i]);
+        auto* style = widget->interactor()->GetInteractorStyle();
+        if (m_rivStyle && style) {  // style will be null in viewport mode since SetupInteractor() is not called
+            style->AddObserver(
+                vtkCommand::WindowLevelEvent,
+                m_rivStyle);
 
+            style->AddObserver(
+                vtkCommand::StartWindowLevelEvent,
+                m_rivStyle);
+
+            style->AddObserver(
+                vtkCommand::EndWindowLevelEvent,
+                m_rivStyle);
+
+            m_rivStyle->RegisterInteractorStyle(style, riv);
+        }
+
+        riv->SetSliceOrientation(kOrientations[i]);
         m_rivs.push_back(riv);
 
         // Register each RIV with the scheduler. In viewport mode all three RIVs
@@ -77,6 +97,11 @@ void SliceController::SetupViewers() {
         // the shared pipeline.
         if (m_scheduler)
             m_scheduler->RegisterRiv(riv.Get());
+    }
+
+    if (m_rivStyle) {  // style will not be active in viewport mode
+        m_rivStyle->SetViewers(m_rivs);
+        m_rivStyle->SetRenderScheduler(m_scheduler);
     }
 }
 

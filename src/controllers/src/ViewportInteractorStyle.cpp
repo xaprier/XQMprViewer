@@ -1,5 +1,7 @@
 #include "controllers/ViewportInteractorStyle.hpp"
 
+#include <vtkImageActor.h>
+#include <vtkImageProperty.h>
 #include <vtkObjectFactory.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
@@ -100,6 +102,33 @@ void ViewportInteractorStyle::OnMouseWheelBackward() {
         return;
 
     m_activeViewer->SetSlice(m_activeViewer->GetSlice() - 1);
+    _RequestRender();
+}
+
+void ViewportInteractorStyle::WindowLevel() {
+    if (!_UpdateActiveViewer() || !m_activeViewer)
+        return;
+
+    this->Superclass::WindowLevel();
+
+    auto* prop = m_activeViewer->GetImageActor()->GetProperty();
+
+    if (!prop)
+        return;
+
+    double wl = prop->GetColorWindow();
+    double ll = prop->GetColorLevel();
+
+    for (auto& v : m_viewers) {
+        if (v && v != m_activeViewer) {
+            auto* otherProp = v->GetImageActor()->GetProperty();
+            if (!otherProp)
+                continue;
+            otherProp->SetColorWindow(wl);
+            otherProp->SetColorLevel(ll);
+        }
+    }
+
     _RequestRender();
 }
 
