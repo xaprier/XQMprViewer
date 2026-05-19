@@ -109,7 +109,9 @@ void ControllerPanelDicomItem::_setupUi() {
         }
         m_currentDirectory = directory;
         m_browseButton->setToolTip(tr("Directory: %1").arg(directory));
+        m_seriesList->blockSignals(true);
         m_seriesList->clear();
+        m_seriesList->blockSignals(false);
         m_seriesToggleButton->setEnabled(false);
         m_loadButton->setEnabled(false);
         m_selectedIndex = -1;

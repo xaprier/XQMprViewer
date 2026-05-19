@@ -75,6 +75,10 @@ const std::vector<DicomController::SeriesInfo>& DicomController::GetSeries() con
     return m_series;
 }
 
+vtkDICOMReader* DicomController::GetReader() const {
+    return m_reader.GetPointer();
+}
+
 void DicomController::_run() {
     const std::string directory = m_currentDirectory;
     const Task task = m_task;

@@ -5,9 +5,11 @@
 
 #include <QMainWindow>
 
-#include "ui/IView.hpp"
-
 class QTabWidget;
+
+namespace adapters {
+class DicomMetaDataAdapter;
+}  // namespace adapters
 
 namespace controllers {
 class DicomController;
@@ -21,6 +23,7 @@ class OrientationMarkerOverlay;
 namespace ui {
 
 class ControllerPanel;
+class DicomMetaDataPanel;
 class MultiWindowView;
 class ViewportView;
 
@@ -55,10 +58,12 @@ class MainWindow : public QMainWindow {
     void _ForEachOverlay(Fn&& fn);
 
     controllers::DicomController* m_dicomController{nullptr};
+    adapters::DicomMetaDataAdapter* m_metaDataAdapter{nullptr};
     QTabWidget* m_tabWidget{nullptr};
     MultiWindowView* m_multiWindowView{nullptr};
     ViewportView* m_viewportView{nullptr};
     ControllerPanel* m_controllerPanel{nullptr};
+    DicomMetaDataPanel* m_metaDataPanel{nullptr};
 };
 
 }  // namespace ui

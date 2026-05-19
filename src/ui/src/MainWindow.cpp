@@ -5,6 +5,8 @@
 
 #include <QDockWidget>
 #include <QHBoxLayout>
+#include <QMenu>
+#include <QMenuBar>
 #include <QStatusBar>
 #include <QTabWidget>
 #include <QVBoxLayout>
@@ -17,6 +19,8 @@
 #include "ui/ControllerPanel.hpp"
 #include "ui/ControllerPanelCornerAnnotationItem.hpp"
 #include "ui/ControllerPanelSphereItem.hpp"
+#include "adapters/DicomMetaDataAdapter.hpp"
+#include "ui/DicomMetaDataPanel.hpp"
 #include "ui/MultiWindowView.hpp"
 #include "ui/ViewportView.hpp"
 
@@ -35,7 +39,7 @@ MainWindow::~MainWindow() = default;
 
 void MainWindow::_BuildUi() {
     m_controllerPanel = new ControllerPanel(this);
-    auto* leftDock = new QDockWidget(this);
+    auto* leftDock = new QDockWidget(tr("Controller Panel"), this);
     leftDock->setWidget(m_controllerPanel);
     leftDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
     leftDock->setMinimumWidth(220);
@@ -47,6 +51,19 @@ void MainWindow::_BuildUi() {
 
     _BuildViewportTab();
     _BuildMultiWindowTab();
+
+    m_metaDataAdapter = new adapters::DicomMetaDataAdapter(m_dicomController, this);
+    m_metaDataPanel = new DicomMetaDataPanel(m_metaDataAdapter, this);
+    auto* rightDock = new QDockWidget(tr("DICOM Metadata"), this);
+    rightDock->setWidget(m_metaDataPanel);
+    rightDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetMovable);
+    rightDock->setMinimumWidth(260);
+    rightDock->setMaximumWidth(420);
+    addDockWidget(Qt::RightDockWidgetArea, rightDock);
+
+    auto* viewMenu = menuBar()->addMenu(tr("View"));
+    viewMenu->addAction(rightDock->toggleViewAction());
+    viewMenu->addAction(leftDock->toggleViewAction());
 
     // Register all corner annotation overlays with the controller panel item
     // so their initial settings are applied immediately.

@@ -58,6 +58,9 @@ class DicomController : public IControllerBase {
     /** @brief Returns the series list populated by the last LoadDicom() call. */
     [[nodiscard]] const std::vector<SeriesInfo>& GetSeries() const;
 
+    /** @brief Returns the underlying VTK reader after a series has been loaded, nullptr otherwise. */
+    [[nodiscard]] vtkDICOMReader* GetReader() const;
+
   Q_SIGNALS:
     /** @brief Emitted after a directory scan completes. @param seriesCount Number of series found. */
     void SeriesListReady(int seriesCount);
