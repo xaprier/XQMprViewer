@@ -45,8 +45,8 @@ ControllerPanelCornerAnnotationItem* ControllerPanel::GetCornerAnnotationItem() 
 
 void ControllerPanel::_setupUi() {
     auto* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(6, 6, 6, 6);
-    layout->setSpacing(8);
+    layout->setContentsMargins(4, 4, 4, 4);
+    layout->setSpacing(4);
 
     m_dicomItem = new ControllerPanelDicomItem(this);
     m_sphereItem = new ControllerPanelSphereItem(this);

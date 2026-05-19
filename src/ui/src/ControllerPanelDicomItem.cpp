@@ -1,7 +1,11 @@
 #include "ui/ControllerPanelDicomItem.hpp"
 
+#include <qboxlayout.h>
+
 #include <QEasingCurve>
 #include <QFileDialog>
+#include <QFormLayout>
+#include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QListWidget>
@@ -46,9 +50,9 @@ void ControllerPanelDicomItem::_OnSeriesItemClicked(int row) {
 }
 
 void ControllerPanelDicomItem::_setupUi() {
-    auto* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(4, 4, 4, 4);
-    layout->setSpacing(6);
+    auto* group = new QGroupBox(tr("DICOM"), this);
+    auto* form = new QFormLayout(group);
+    form->setSpacing(4);
 
     m_browseButton = new QPushButton(tr("Select Folder"), this);
     m_browseButton->setToolTip(tr("Select DICOM folder"));
@@ -83,11 +87,19 @@ void ControllerPanelDicomItem::_setupUi() {
     m_loadButton->setToolTip(tr("Load selected series"));
     m_loadButton->setEnabled(false);
 
-    layout->addWidget(m_browseButton);
-    layout->addWidget(m_seriesToggleButton);
-    layout->addWidget(m_seriesList);
-    layout->addWidget(m_selectedLabel);
-    layout->addWidget(m_loadButton);
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    buttonLayout->addWidget(m_browseButton);
+    buttonLayout->addWidget(m_seriesToggleButton);
+    buttonLayout->addStretch();
+
+    form->addRow(buttonLayout);
+    form->addRow(m_seriesList);
+    form->addRow(tr("Selected Series:"), m_selectedLabel);
+    form->addRow(m_loadButton);
+
+    auto* outer = new QVBoxLayout(this);
+    outer->setContentsMargins(0, 0, 0, 0);
+    outer->addWidget(group);
 
     connect(m_browseButton, &QPushButton::clicked, this, [this]() {
         const QString directory = QFileDialog::getExistingDirectory(

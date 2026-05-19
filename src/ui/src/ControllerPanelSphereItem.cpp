@@ -4,6 +4,8 @@
 #include <QColor>
 #include <QColorDialog>
 #include <QDoubleSpinBox>
+#include <QFormLayout>
+#include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
@@ -27,9 +29,9 @@ QColor ControllerPanelSphereItem::GetColor() const {
 }
 
 void ControllerPanelSphereItem::_setupUi() {
-    auto* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(4, 4, 4, 4);
-    layout->setSpacing(6);
+    auto* group = new QGroupBox(tr("Sphere"), this);
+    auto* form = new QFormLayout(group);
+    form->setSpacing(4);
 
     m_enableButton = new QPushButton(tr("Add/Remove Sphere"), this);
 
@@ -47,9 +49,13 @@ void ControllerPanelSphereItem::_setupUi() {
     m_colorButton->setAutoFillBackground(true);
     m_colorButton->setStyleSheet(QString("background-color: %1").arg(m_color.name()));
 
-    layout->addWidget(m_enableButton);
-    layout->addLayout(radiusRow);
-    layout->addWidget(m_colorButton);
+    form->addRow(m_enableButton);
+    form->addRow(radiusRow);
+    form->addRow(m_colorButton);
+
+    auto* outer = new QVBoxLayout(this);
+    outer->setContentsMargins(0, 0, 0, 0);
+    outer->addWidget(group);
 
     connect(m_enableButton, &QPushButton::clicked, this, &ControllerPanelSphereItem::SphereAddRemoveClicked);
     connect(m_radiusSpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &ControllerPanelSphereItem::SphereRadiusChanged);

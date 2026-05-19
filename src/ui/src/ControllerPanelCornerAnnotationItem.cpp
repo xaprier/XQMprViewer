@@ -41,7 +41,9 @@ void ControllerPanelCornerAnnotationItem::ClearOverlays() {
 
 void ControllerPanelCornerAnnotationItem::_setupUi() {
     auto* group = new QGroupBox(tr("Corner Annotations"), this);
-    auto* form  = new QFormLayout(group);
+    auto* form = new QFormLayout(group);
+    QGridLayout* grid = new QGridLayout();  // for grouping check boxes in 2 columns 2 rows
+
     form->setSpacing(4);
 
     m_enableCheck = new QCheckBox(tr("Enable"), group);
@@ -62,6 +64,10 @@ void ControllerPanelCornerAnnotationItem::_setupUi() {
 
     m_showViewNameCheck = new QCheckBox(tr("View name"), group);
     m_showViewNameCheck->setChecked(true);
+    grid->addWidget(m_showSliceInfoCheck, 0, 0);
+    grid->addWidget(m_showWindowLevelCheck, 0, 1);
+    grid->addWidget(m_showSpacingCheck, 1, 0);
+    grid->addWidget(m_showViewNameCheck, 1, 1);
 
     m_fontSizeSpin = new QSpinBox(group);
     m_fontSizeSpin->setRange(6, 48);
@@ -80,13 +86,10 @@ void ControllerPanelCornerAnnotationItem::_setupUi() {
     m_colorButton->setToolTip(tr("Pick annotation text color"));
 
     form->addRow(m_enableCheck);
-    form->addRow(tr("Position:"),   m_positionCombo);
-    form->addRow(m_showSliceInfoCheck);
-    form->addRow(m_showWindowLevelCheck);
-    form->addRow(m_showSpacingCheck);
-    form->addRow(m_showViewNameCheck);
-    form->addRow(tr("Font size:"),  m_fontSizeSpin);
-    form->addRow(tr("Margin:"),     m_marginSpin);
+    form->addRow(tr("Position:"), m_positionCombo);
+    form->addRow(grid);
+    form->addRow(tr("Font size:"), m_fontSizeSpin);
+    form->addRow(tr("Margin:"), m_marginSpin);
     form->addRow(tr("Text color:"), m_colorButton);
 
     auto* outer = new QVBoxLayout(this);
