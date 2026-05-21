@@ -1,0 +1,5 @@
+<map id="controllers::IViewController::AddSphere" name="controllers::IViewController::AddSphere">
+<area shape="rect" id="Node000001" title="Adds a sphere actor to every registered controller instance. No&#45;op if already added." alt="" coords="252,5,451,45"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1IViewController.html#ae07a2413f0ed5704c87748c9b3b05e31" title="Toggles the sphere on or off across all instances." alt="" coords="5,5,204,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+</map>

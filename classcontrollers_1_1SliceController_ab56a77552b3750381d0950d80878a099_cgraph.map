@@ -1,0 +1,7 @@
+<map id="controllers::SliceController::SetImageData" name="controllers::SliceController::SetImageData">
+<area shape="rect" id="Node000001" title="Pushes image into the reslice pipeline and requests a render." alt="" coords="5,5,200,45"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1SliceController.html#aa16d11e88ecc06d76ba4b3f832cc98c4" title="Request a render for all registered RIV windows via the scheduler." alt="" coords="248,5,443,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,23,234,23,234,28,200,28"/>
+<area shape="rect" id="Node000003" href="$classrender_1_1RenderScheduler.html#aabea841bbbe87d708f716196ec43270d" title="Mark the target associated with window as needing a render." alt="" coords="491,5,673,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="443,23,477,23,477,28,443,28"/>
+</map>

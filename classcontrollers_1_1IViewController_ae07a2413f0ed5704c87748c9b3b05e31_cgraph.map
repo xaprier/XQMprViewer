@@ -1,0 +1,7 @@
+<map id="controllers::IViewController::ToggleSphere" name="controllers::IViewController::ToggleSphere">
+<area shape="rect" id="Node000001" title="Toggles the sphere on or off across all instances." alt="" coords="5,37,204,77"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1IViewController.html#a8d885b56fbc4c3a765947ce013077e93" title="Adds a sphere actor to every registered controller instance. No&#45;op if already added." alt="" coords="252,5,451,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,42,238,37,239,43,205,47"/>
+<area shape="rect" id="Node000003" href="$classcontrollers_1_1IViewController.html#a534f81537235f5828e16375a2d0005e9" title="Removes the sphere from every registered controller instance." alt="" coords="252,69,451,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,68,239,72,238,77,204,73"/>
+</map>

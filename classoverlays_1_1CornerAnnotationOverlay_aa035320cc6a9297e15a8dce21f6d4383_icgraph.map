@@ -1,0 +1,5 @@
+<map id="overlays::CornerAnnotationOverlay::SetViewportRect" name="overlays::CornerAnnotationOverlay::SetViewportRect">
+<area shape="rect" id="Node000001" title="Restrict painting to a normalised sub&#45;rectangle of the host widget." alt="" coords="207,5,407,45"/>
+<area shape="rect" id="Node000002" href="$namespaceadapters.html#afa3912916005b099849b3f0283fe27ac" title=" " alt="" coords="5,13,159,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,28,159,28,159,23,192,23"/>
+</map>

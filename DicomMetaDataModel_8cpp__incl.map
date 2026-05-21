@@ -1,0 +1,13 @@
+<map id="src/ui/src/DicomMetaDataModel.cpp" name="src/ui/src/DicomMetaDataModel.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="166,5,357,45"/>
+<area shape="rect" id="Node000002" href="$DicomMetaDataModel_8hpp.html" title=" " alt="" coords="155,93,367,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,46,264,79,259,79,259,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,165,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,121,128,164,126,159,232,116"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="189,167,245,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="256,120,234,156,229,154,252,118"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="270,167,341,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="271,118,293,154,289,156,266,120"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="365,167,438,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="285,116,368,158,365,163,283,121"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ui::ControllerPanelOrientationMarkerItem" name="ui::ControllerPanelOrientationMarkerItem">
+<area shape="rect" id="Node000001" title="Control panel item for anatomical orientation marker overlay." alt="" coords="5,79,220,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="73,5,152,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,44,115,79,110,79,110,44"/>
+</map>

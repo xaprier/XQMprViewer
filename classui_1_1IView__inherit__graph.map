@@ -1,0 +1,9 @@
+<map id="ui::IView" name="ui::IView">
+<area shape="rect" id="Node000001" title="Abstract base for all render&#45;view widgets." alt="" coords="129,79,208,104"/>
+<area shape="rect" id="Node000003" href="$classui_1_1MultiWindowView.html" title="View widget for multi&#45;window DICOM display." alt="" coords="5,152,164,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,115,100,154,97,150,143,111"/>
+<area shape="rect" id="Node000004" href="$classui_1_1ViewportView.html" title="View widget for single&#45;window multi&#45;viewport DICOM display." alt="" coords="188,152,320,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="194,110,242,150,238,154,191,115"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="129,5,208,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,44,171,79,166,79,166,44"/>
+</map>

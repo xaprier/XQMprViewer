@@ -1,0 +1,5 @@
+<map id="overlays::OrientationMarkerOverlay::SetViewportRect" name="overlays::OrientationMarkerOverlay::SetViewportRect">
+<area shape="rect" id="Node000001" title="Restrict painting to a normalised sub&#45;rectangle of the host widget." alt="" coords="207,5,411,45"/>
+<area shape="rect" id="Node000002" href="$namespaceadapters.html#aa18399bbfef5dabf44f7c6aac6d424ad" title=" " alt="" coords="5,13,159,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,28,159,28,159,23,193,23"/>
+</map>

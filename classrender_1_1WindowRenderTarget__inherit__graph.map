@@ -1,0 +1,5 @@
+<map id="render::WindowRenderTarget" name="render::WindowRenderTarget">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,216,104"/>
+<area shape="rect" id="Node000002" href="$classrender_1_1IRenderTarget.html" title="Abstract render target managed by RenderScheduler." alt="" coords="29,5,192,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,44,113,79,108,79,108,44"/>
+</map>

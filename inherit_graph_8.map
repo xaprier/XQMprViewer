@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,105,80,131"/>
+<area shape="rect" id="Node000001" href="$classadapters_1_1DicomMetaDataAdapter.html" title="Bridge between DicomController and any Qt widget that needs metadata rows." alt="" coords="128,31,372,56"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="72,95,127,66,169,54,170,59,129,71,75,100"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1IControllerBase.html" title="Minimal QObject base shared by all controllers." alt="" coords="151,80,349,105"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="94,109,150,102,151,107,94,114"/>
+<area shape="rect" id="Node000009" href="$classqvv_1_1ViewportManager.html" title="Manages multiple viewports inside a single vtkRenderWindow." alt="" coords="166,129,334,155"/>
+<area shape="poly" id="edge13_Node000000_Node000009" title=" " alt="" coords="94,121,166,130,165,135,93,126"/>
+<area shape="rect" id="Node000010" href="$classui_1_1ViewportLayoutManager.html" title="Global orchestrator for runtime layout switching." alt="" coords="149,179,351,204"/>
+<area shape="poly" id="edge14_Node000000_Node000010" title=" " alt="" coords="75,136,129,165,166,176,164,181,127,170,72,141"/>
+<area shape="rect" id="Node000003" href="$classcontrollers_1_1DicomController.html" title="Scans a directory for DICOM series and loads them asynchronously." alt="" coords="421,5,627,31"/>
+<area shape="poly" id="edge7_Node000002_Node000003" title=" " alt="" coords="345,74,371,66,395,54,419,41,460,28,461,33,421,46,397,59,373,71,346,79"/>
+<area shape="rect" id="Node000004" href="$classcontrollers_1_1IViewController.html" title="Abstract base for view controllers that manage DICOM slice and sphere rendering." alt="" coords="425,55,623,80"/>
+<area shape="poly" id="edge8_Node000002_Node000004" title=" " alt="" coords="363,80,424,74,425,79,363,85"/>
+<area shape="rect" id="Node000007" href="$classcontrollers_1_1SliceController.html" title="Manages up to three vtkResliceImageViewer instances for orthogonal slice display." alt="" coords="427,104,621,129"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="364,100,427,106,426,111,363,105"/>
+<area shape="rect" id="Node000008" href="$classcontrollers_1_1SphereController.html" title="Draggable sphere actor that works in both viewport and multi&#45;window modes." alt="" coords="420,153,628,179"/>
+<area shape="poly" id="edge12_Node000002_Node000008" title=" " alt="" coords="341,106,373,116,397,128,421,140,459,151,457,156,419,144,395,132,371,120,339,111"/>
+<area shape="rect" id="Node000005" href="$classcontrollers_1_1MultiWindowController.html" title="View controller that uses one render window per DICOM plane." alt="" coords="695,19,879,59"/>
+<area shape="poly" id="edge9_Node000004_Node000005" title=" " alt="" coords="637,53,694,46,695,52,638,58"/>
+<area shape="rect" id="Node000006" href="$classcontrollers_1_1ViewportController.html" title="View controller that displays three DICOM planes in a single render window." alt="" coords="676,84,897,109"/>
+<area shape="poly" id="edge10_Node000004_Node000006" title=" " alt="" coords="637,77,676,82,675,87,637,83"/>
+</map>

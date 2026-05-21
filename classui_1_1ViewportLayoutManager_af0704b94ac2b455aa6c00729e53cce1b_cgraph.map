@@ -1,0 +1,5 @@
+<map id="ui::ViewportLayoutManager::RegisterTarget" name="ui::ViewportLayoutManager::RegisterTarget">
+<area shape="rect" id="Node000001" title="Register a view as a layout target." alt="" coords="5,5,207,45"/>
+<area shape="rect" id="Node000002" href="$classui_1_1ILayoutTarget.html#a2d55c3f34d1ee1f94af9c2bcc237f0cc" title="Apply the given layout to this view." alt="" coords="255,5,393,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,23,241,23,241,28,207,28"/>
+</map>

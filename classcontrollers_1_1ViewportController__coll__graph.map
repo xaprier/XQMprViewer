@@ -1,0 +1,9 @@
+<map id="controllers::ViewportController" name="controllers::ViewportController">
+<area shape="rect" id="Node000001" title="View controller that displays three DICOM planes in a single render window." alt="" coords="5,225,227,251"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1IViewController.html" title="Abstract base for view controllers that manage DICOM slice and sphere rendering." alt="" coords="17,152,215,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,191,119,225,113,225,113,191"/>
+<area shape="rect" id="Node000003" href="$classcontrollers_1_1IControllerBase.html" title="Minimal QObject base shared by all controllers." alt="" coords="17,79,215,104"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="119,118,119,152,113,152,113,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="79,5,153,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="119,44,119,79,113,79,113,44"/>
+</map>

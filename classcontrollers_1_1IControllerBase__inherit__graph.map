@@ -1,0 +1,17 @@
+<map id="controllers::IControllerBase" name="controllers::IControllerBase">
+<area shape="rect" id="Node000001" title="Minimal QObject base shared by all controllers." alt="" coords="128,80,327,105"/>
+<area shape="rect" id="Node000003" href="$classcontrollers_1_1DicomController.html" title="Scans a directory for DICOM series and loads them asynchronously." alt="" coords="376,5,581,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="274,73,374,39,417,28,419,33,375,45,276,78"/>
+<area shape="rect" id="Node000004" href="$classcontrollers_1_1IViewController.html" title="Abstract base for view controllers that manage DICOM slice and sphere rendering." alt="" coords="379,55,578,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="340,79,379,75,379,80,341,84"/>
+<area shape="rect" id="Node000007" href="$classcontrollers_1_1SliceController.html" title="Manages up to three vtkResliceImageViewer instances for orthogonal slice display." alt="" coords="381,104,576,129"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="341,101,381,105,381,110,340,106"/>
+<area shape="rect" id="Node000008" href="$classcontrollers_1_1SphereController.html" title="Draggable sphere actor that works in both viewport and multi&#45;window modes." alt="" coords="375,153,583,179"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="277,107,375,139,419,151,418,156,374,145,275,112"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,80,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,90,128,90,128,95,94,95"/>
+<area shape="rect" id="Node000005" href="$classcontrollers_1_1MultiWindowController.html" title="View controller that uses one render window per DICOM plane." alt="" coords="649,19,833,59"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="592,53,649,46,650,52,592,58"/>
+<area shape="rect" id="Node000006" href="$classcontrollers_1_1ViewportController.html" title="View controller that displays three DICOM planes in a single render window." alt="" coords="631,84,852,109"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="592,77,631,82,630,87,591,83"/>
+</map>

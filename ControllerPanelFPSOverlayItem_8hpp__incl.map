@@ -1,0 +1,22 @@
+<map id="src/ui/include/ui/ControllerPanelFPSOverlayItem.hpp" name="src/ui/include/ui/ControllerPanelFPSOverlayItem.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="7,5,199,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,167,72,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,48,68,69,53,94,45,124,41,153,36,153,39,123,48,92,63,66,81,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="63,93,142,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="105,46,105,79,100,79,100,46"/>
+<area shape="rect" id="Node000004" href="$FPSOverlay_8hpp.html" title=" " alt="" coords="166,93,349,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,43,224,85,221,89,139,48"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="223,121,86,165,85,160,221,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="103,167,166,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="239,121,168,162,165,157,236,116"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="190,167,311,192"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="259,119,256,153,250,153,254,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="336,167,403,192"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="277,116,341,157,338,161,274,121"/>
+<area shape="rect" id="Node000008" href="$IOverlay_8hpp.html" title=" " alt="" coords="427,167,589,192"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="298,116,455,160,453,165,297,121"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="437,240,491,265"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="503,194,481,230,476,227,498,191"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="515,240,586,265"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="517,191,539,227,535,230,513,194"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="src/ui/include/ui/ViewportLayoutSelector.hpp" name="src/ui/include/ui/ViewportLayoutSelector.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="29,5,215,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,84,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,47,68,85,64,82,101,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="91,167,153,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,46,125,153,119,153,119,46"/>
+<area shape="rect" id="Node000004" href="$ViewportLayoutTypes_8hpp.html" title=" " alt="" coords="159,93,365,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="157,43,230,84,228,89,154,48"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="241,121,158,163,156,158,238,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="485,240,541,265"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="343,116,433,136,471,149,496,165,506,179,512,195,516,226,511,227,507,196,501,181,492,169,468,154,431,141,341,121"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="169,240,227,265"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="253,121,235,142,219,168,209,198,203,227,198,226,204,196,214,166,231,139,249,117"/>
+<area shape="rect" id="Node000007" href="$ViewportConfig_8hpp.html" title=" " alt="" coords="229,167,481,192"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="279,117,331,156,328,160,275,121"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="382,190,476,232,474,237,380,194"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="331,194,237,237,235,232,329,190"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="256,240,455,265"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="358,192,358,226,353,226,353,192"/>
+</map>

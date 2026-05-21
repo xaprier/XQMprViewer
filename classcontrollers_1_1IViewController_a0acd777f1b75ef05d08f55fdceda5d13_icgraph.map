@@ -1,0 +1,5 @@
+<map id="controllers::IViewController::_Initialize" name="controllers::IViewController::_Initialize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="252,5,451,45"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1IViewController.html#a43a6b1b3ec219124d2ff7646f096ce14" title="Initialises the controller with the supplied widgets. No&#45;op if already initialised." alt="" coords="5,5,204,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="controllers::DicomController::ImageDataReady" name="controllers::DicomController::ImageDataReady">
+<area shape="rect" id="Node000001" title="Emitted after a series has been loaded." alt="" coords="297,5,503,45"/>
+<area shape="rect" id="Node000002" href="$classadapters_1_1DicomMetaDataAdapter.html#a5eeb61229f513ba28207302f593a9677" title=" " alt="" coords="5,5,249,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="283,28,249,28,249,23,283,23"/>
+</map>

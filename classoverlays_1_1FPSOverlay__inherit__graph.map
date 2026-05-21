@@ -1,0 +1,7 @@
+<map id="overlays::FPSOverlay" name="overlays::FPSOverlay">
+<area shape="rect" id="Node000001" title="Qt&#45;native FPS overlay that lives as a child widget on top of a QVTKOpenGLNativeWidget and tracks real..." alt="" coords="22,79,183,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,72,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,39,94,77,90,80,56,43"/>
+<area shape="rect" id="Node000003" href="$classoverlays_1_1IOverlay.html" title=" " alt="" coords="96,5,237,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,43,115,80,111,77,145,39"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="controllers::DicomController::LoadSeries" name="controllers::DicomController::LoadSeries">
+<area shape="rect" id="Node000001" title="Loads the series at seriesIndex from the last scanned directory. Emits ImageDataReady when the image ..." alt="" coords="551,5,756,45"/>
+<area shape="rect" id="Node000002" href="$classcontrollers_1_1DicomController.html#a54de66f138804b4b2c434c108f2a7db8" title="Emitted after a series has been loaded." alt="" coords="297,5,503,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="537,28,503,28,503,23,537,23"/>
+<area shape="rect" id="Node000003" href="$classadapters_1_1DicomMetaDataAdapter.html#a5eeb61229f513ba28207302f593a9677" title=" " alt="" coords="5,5,249,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="283,28,249,28,249,23,283,23"/>
+</map>

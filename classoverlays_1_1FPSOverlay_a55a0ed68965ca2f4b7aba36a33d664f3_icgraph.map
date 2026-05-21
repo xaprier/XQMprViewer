@@ -1,0 +1,5 @@
+<map id="overlays::FPSOverlay::SetPosition" name="overlays::FPSOverlay::SetPosition">
+<area shape="rect" id="Node000001" title="Set position for the visible overlay." alt="" coords="269,5,431,45"/>
+<area shape="rect" id="Node000002" href="$classui_1_1ControllerPanelFPSOverlayItem.html#a856a34a83f92e97c011408ca50cb6e1c" title="Attach an overlay to be controlled by this panel." alt="" coords="5,5,221,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="255,28,221,28,221,23,255,23"/>
+</map>

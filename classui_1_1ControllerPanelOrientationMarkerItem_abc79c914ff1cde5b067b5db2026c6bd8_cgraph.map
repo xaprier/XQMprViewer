@@ -1,0 +1,11 @@
+<map id="ui::ControllerPanelOrientationMarkerItem::AddOverlay" name="ui::ControllerPanelOrientationMarkerItem::AddOverlay">
+<area shape="rect" id="Node000001" title="Attach an overlay to be controlled by this panel." alt="" coords="5,101,220,141"/>
+<area shape="rect" id="Node000002" href="$classoverlays_1_1OrientationMarkerOverlay.html#afa9f92191abb867c5600cc884a41ba6c" title="Enable or disable the overlay." alt="" coords="268,5,472,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,99,267,55,289,47,291,52,269,60,160,104"/>
+<area shape="rect" id="Node000003" href="$classoverlays_1_1OrientationMarkerOverlay.html#a16ab38a2f210ad7fec58ed088d890bfc" title=" " alt="" coords="268,69,472,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,105,254,101,255,106,220,111"/>
+<area shape="rect" id="Node000004" href="$classoverlays_1_1OrientationMarkerOverlay.html#a9a47ea9758ffa5b4124333995fa9b070" title="Toggle between short (L/R/A/P/S/I) and long (Left/Right/Anterior/Posterior/Superior/Inferior) label m..." alt="" coords="268,133,472,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="220,132,255,136,254,142,220,137"/>
+<area shape="rect" id="Node000005" href="$classoverlays_1_1OrientationMarkerOverlay.html#a64f6936e9e19ea106741fffc5f00e338" title=" " alt="" coords="268,197,472,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="160,139,269,183,291,191,289,196,267,188,158,144"/>
+</map>

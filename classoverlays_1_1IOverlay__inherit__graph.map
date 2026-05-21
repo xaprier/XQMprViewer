@@ -1,0 +1,9 @@
+<map id="overlays::IOverlay" name="overlays::IOverlay">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,70,147,95"/>
+<area shape="rect" id="Node000002" href="$classoverlays_1_1CornerAnnotationOverlay.html" title="Slice&#45;metadata annotation overlay rendered as a child widget on a QVTKOpenGLNativeWidget." alt="" coords="197,5,397,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,64,219,43,220,48,139,69"/>
+<area shape="rect" id="Node000003" href="$classoverlays_1_1FPSOverlay.html" title="Qt&#45;native FPS overlay that lives as a child widget on top of a QVTKOpenGLNativeWidget and tracks real..." alt="" coords="216,70,377,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,80,216,80,216,85,161,85"/>
+<area shape="rect" id="Node000004" href="$classoverlays_1_1OrientationMarkerOverlay.html" title="Anatomical orientation label overlay rendered as a child widget on top of a QVTKOpenGLNativeWidget." alt="" coords="195,120,399,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="139,96,220,117,219,123,138,101"/>
+</map>

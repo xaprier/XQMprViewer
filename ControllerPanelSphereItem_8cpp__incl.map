@@ -1,0 +1,21 @@
+<map id="src/ui/src/ControllerPanelSphereItem.cpp" name="src/ui/src/ControllerPanelSphereItem.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="483,5,665,45"/>
+<area shape="rect" id="Node000002" href="$ControllerPanelSphereItem_8hpp.html" title=" " alt="" coords="5,93,188,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="483,46,202,96,201,90,482,40"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="213,101,279,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="483,47,391,69,293,96,286,98,284,93,292,91,390,63,482,42"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="304,101,412,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="528,48,400,98,398,93,526,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="437,101,567,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="560,47,523,91,519,88,556,44"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="591,101,701,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="592,44,629,88,625,91,588,47"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="725,101,821,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="619,43,735,93,733,98,617,48"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="845,101,951,126"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="650,43,833,91,846,94,845,99,832,96,648,48"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="976,101,1087,126"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="666,37,807,60,964,91,980,95,979,100,963,96,806,65,665,42"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="57,181,136,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,134,99,167,94,167,94,134"/>
+</map>

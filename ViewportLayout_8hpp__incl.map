@@ -1,0 +1,15 @@
+<map id="lib/include/XQVtkViewport/ViewportLayout.hpp" name="lib/include/XQVtkViewport/ViewportLayout.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="33,5,225,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,167,64,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,48,46,67,22,95,18,109,17,123,25,153,20,154,12,124,12,108,18,92,43,63,75,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="33,93,95,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="116,47,84,84,80,81,111,44"/>
+<area shape="rect" id="Node000004" href="$ViewportConfig_8hpp.html" title=" " alt="" coords="120,93,269,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="147,44,178,81,174,84,143,47"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="207,167,406,192"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="206,43,247,62,283,92,300,121,307,152,302,153,295,123,279,95,245,67,204,48"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="170,121,74,163,72,159,168,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="128,167,184,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="191,120,171,156,166,153,186,118"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="214,116,278,157,275,161,211,121"/>
+</map>

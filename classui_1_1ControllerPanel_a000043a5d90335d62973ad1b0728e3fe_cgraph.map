@@ -1,0 +1,5 @@
+<map id="ui::ControllerPanel::SetSeries" name="ui::ControllerPanel::SetSeries">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,147,45"/>
+<area shape="rect" id="Node000002" href="$classui_1_1ControllerPanelDicomItem.html#a8bd1d8946a935aecb122c1e16a893feb" title=" " alt="" coords="195,5,377,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,23,181,23,181,28,147,28"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="overlays::OrientationMarkerOverlay" name="overlays::OrientationMarkerOverlay">
+<area shape="rect" id="Node000001" title="Anatomical orientation label overlay rendered as a child widget on top of a QVTKOpenGLNativeWidget." alt="" coords="9,79,213,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,84,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,39,97,77,93,80,61,43"/>
+<area shape="rect" id="Node000003" href="$classoverlays_1_1IOverlay.html" title=" " alt="" coords="109,5,250,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,43,130,80,126,77,158,39"/>
+</map>

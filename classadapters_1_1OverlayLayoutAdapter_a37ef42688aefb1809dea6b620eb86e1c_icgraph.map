@@ -1,0 +1,5 @@
+<map id="adapters::OverlayLayoutAdapter::SetOrientationMarkerUserEnabled" name="adapters::OverlayLayoutAdapter::SetOrientationMarkerUserEnabled">
+<area shape="rect" id="Node000001" title="Notify the adapter that the user has toggled orientation marker enable state for plane planeIndex." alt="" coords="328,5,579,45"/>
+<area shape="rect" id="Node000002" href="$classadapters_1_1OverlayLayoutAdapter.html#aee82264418ebe07e8e5a37472c68c0b8" title="Apply user&#45;enable for ALL planes at once (e.g., global checkbox)." alt="" coords="5,5,280,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="314,28,280,28,280,23,314,23"/>
+</map>

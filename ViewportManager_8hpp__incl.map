@@ -1,0 +1,23 @@
+<map id="lib/include/XQVtkViewport/ViewportManager.hpp" name="lib/include/XQVtkViewport/ViewportManager.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="184,5,376,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,80,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,48,91,92,89,87,222,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="104,93,181,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,48,176,89,174,84,246,43"/>
+<area shape="rect" id="Node000004" href="$IViewportObserver_8hpp.html" title=" " alt="" coords="256,93,427,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="297,44,326,81,322,84,293,47"/>
+<area shape="rect" id="Node000005" href="$RenderStats_8hpp.html" title=" " alt="" coords="246,167,375,192"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="266,47,247,81,243,99,246,118,261,139,281,157,277,161,257,143,242,120,238,99,242,79,261,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="339,240,538,265"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="374,43,411,62,427,76,441,92,455,126,459,163,455,198,449,228,444,226,450,197,453,163,450,127,436,95,424,79,408,67,372,48"/>
+<area shape="rect" id="Node000007" href="$ViewportConfig_8hpp.html" title=" " alt="" coords="504,93,653,119"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="352,43,523,87,521,92,351,48"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="339,120,323,155,319,153,334,118"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="353,117,389,165,427,226,423,229,384,168,349,120"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="333,190,407,231,404,235,330,194"/>
+<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="569,121,461,232,457,228,565,117"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="552,167,608,192"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="582,119,582,153,577,153,576,119"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="632,167,691,192"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="594,117,639,155,636,160,590,121"/>
+</map>

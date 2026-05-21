@@ -1,0 +1,27 @@
+<map id="src/ui/include/ui/ViewportLayoutManager.hpp" name="src/ui/include/ui/ViewportLayoutManager.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="125,5,312,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,80,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,48,82,90,80,85,175,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="104,93,181,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="202,47,166,85,162,81,198,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="283,240,346,265"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,45,246,118,275,177,303,227,298,229,270,180,242,120,220,46"/>
+<area shape="rect" id="Node000005" href="$OverlayLayoutAdapter_8hpp.html" title=" " alt="" coords="256,93,512,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="259,43,349,85,346,90,257,48"/>
+<area shape="rect" id="Node000007" href="$ViewportLayoutTypes_8hpp.html" title=" " alt="" coords="433,167,639,192"/>
+<area shape="poly" id="edge15_Node000001_Node000007" title=" " alt="" coords="313,33,375,42,438,54,491,70,511,80,526,92,535,106,540,122,542,153,537,153,535,123,530,108,522,95,509,85,489,75,436,59,374,47,312,38"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="381,120,329,229,324,226,376,118"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="407,313,463,339"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="389,118,431,299,426,300,384,120"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="410,116,500,158,498,163,407,121"/>
+<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="501,195,360,240,358,235,500,189"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="517,194,488,214,462,242,448,271,441,301,435,299,443,269,458,238,485,210,513,190"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="727,313,785,339"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="640,187,693,205,718,220,739,238,749,252,755,268,760,299,754,300,750,270,744,255,735,242,715,224,691,210,638,192"/>
+<area shape="rect" id="Node000009" href="$ViewportConfig_8hpp.html" title=" " alt="" coords="473,240,725,265"/>
+<area shape="poly" id="edge11_Node000007_Node000009" title=" " alt="" coords="548,191,581,228,577,231,544,194"/>
+<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="573,268,475,310,473,305,571,263"/>
+<area shape="poly" id="edge13_Node000009_Node000008" title=" " alt="" coords="625,263,719,305,717,310,623,268"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="499,313,698,339"/>
+<area shape="poly" id="edge14_Node000009_Node000010" title=" " alt="" coords="601,266,601,300,596,300,596,266"/>
+</map>

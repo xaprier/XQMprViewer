@@ -1,0 +1,9 @@
+<map id="ui::ViewportView" name="ui::ViewportView">
+<area shape="rect" id="Node000001" title="View widget for single&#45;window multi&#45;viewport DICOM display." alt="" coords="43,152,175,177"/>
+<area shape="rect" id="Node000002" href="$classui_1_1IView.html" title="Abstract base for all render&#45;view widgets." alt="" coords="5,79,84,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,113,100,150,96,154,62,116"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,84,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="47,44,47,79,42,79,42,44"/>
+<area shape="rect" id="Node000004" href="$classui_1_1ILayoutTarget.html" title="Interface implemented by any view that can accept a runtime layout change." alt="" coords="109,79,239,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="156,116,121,154,117,150,152,113"/>
+</map>

@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['getcolor_0',['getcolor',['../classui_1_1ControllerPanelSphereItem.html#aaf291940f3c6f7986dd03aeea545cf53',1,'ui::ControllerPanelSphereItem::GetColor()'],['../classcontrollers_1_1SphereController.html#ab6d63b684159abea631994516860552d',1,'controllers::SphereController::GetColor()']]],
+  ['getcontroller_1',['getcontroller',['../classui_1_1MultiWindowView.html#a040b994922de885e90860cc89449eaab',1,'ui::MultiWindowView::GetController()'],['../classui_1_1ViewportView.html#ae2849a3f0f379bf4ff253f7e88e64c5c',1,'ui::ViewportView::GetController()']]],
+  ['getcornerannotationitem_2',['GetCornerAnnotationItem',['../classui_1_1ControllerPanel.html#a119a3cc20a6a9739bca9164e4566a387',1,'ui::ControllerPanel']]],
+  ['getdicomitem_3',['GetDicomItem',['../classui_1_1ControllerPanel.html#a667584e6095b44f09a769ba9091b161d',1,'ui::ControllerPanel']]],
+  ['getfpsoverlayitem_4',['GetFPSOverlayItem',['../classui_1_1ControllerPanel.html#af9a4b292461e00594f28658e641a8c72',1,'ui::ControllerPanel']]],
+  ['getorientationmarkeritem_5',['GetOrientationMarkerItem',['../classui_1_1ControllerPanel.html#a17179094fb076f30da633a27b879a516',1,'ui::ControllerPanel']]],
+  ['getoverlaypositionnames_6',['GetOverlayPositionNames',['../namespaceoverlays.html#ac50f2751805efe760fb4028c2b59fb41',1,'overlays']]],
+  ['getoverlays_7',['GetOverlays',['../classui_1_1IView.html#a301d0367ee823790d9340b95a7dc31ad',1,'ui::IView']]],
+  ['getposition_8',['getposition',['../classcontrollers_1_1SphereController.html#a4d51226994a14d089f8b2d07b3cd9109',1,'controllers::SphereController::GetPosition()'],['../classoverlays_1_1IOverlay.html#a51e5c049bb8fce13f38d4ef41ab3ec74',1,'overlays::IOverlay::GetPosition()']]],
+  ['getradius_9',['getradius',['../classcontrollers_1_1SphereController.html#a9fc0b38b3a943c94562438c21019f15d',1,'controllers::SphereController::GetRadius()'],['../classui_1_1ControllerPanelSphereItem.html#aca4c78cc8009cd7328a818a4f66b2ce2',1,'ui::ControllerPanelSphereItem::GetRadius()']]],
+  ['getreader_10',['GetReader',['../classcontrollers_1_1DicomController.html#aa697f33e30933a1c08ebe7901e1e1672',1,'controllers::DicomController']]],
+  ['getrenderer_11',['GetRenderer',['../classqvv_1_1ViewportManager.html#ab4eb1893f132ca2a091469fb9c62d0a5',1,'qvv::ViewportManager']]],
+  ['getrenderers_12',['GetRenderers',['../classcontrollers_1_1SliceController.html#aa6ef9a75c25a5a3fc115d2a170991823',1,'controllers::SliceController']]],
+  ['getrenderwindow_13',['getrenderwindow',['../classrender_1_1IRenderTarget.html#a743b47e846d27d667109e492a47d40ef',1,'render::IRenderTarget::GetRenderWindow()'],['../classqvv_1_1ViewportManager.html#aec82c2215555df572c38bcaf0dbd1fe3',1,'qvv::ViewportManager::GetRenderWindow()']]],
+  ['getseries_14',['GetSeries',['../classcontrollers_1_1DicomController.html#a2aa99e4d91df241d6dd62ee967316fd2',1,'controllers::DicomController']]],
+  ['getslicecontroller_15',['GetSliceController',['../classcontrollers_1_1IViewController.html#ab42ba8b06ad0d6c4ab54a2dad97ad30b',1,'controllers::IViewController']]],
+  ['getspherecolor_16',['GetSphereColor',['../classcontrollers_1_1IViewController.html#ac07c804b9c799dde9763e2a6cc63513c',1,'controllers::IViewController']]],
+  ['getsphereitem_17',['GetSphereItem',['../classui_1_1ControllerPanel.html#acd32a6e52dcceacb2e780e6ddc0331e7',1,'ui::ControllerPanel']]],
+  ['getsphereradius_18',['GetSphereRadius',['../classcontrollers_1_1IViewController.html#a79c0b22ea14a2c2d6f4bc4dd2bd06c76',1,'controllers::IViewController']]],
+  ['getstats_19',['GetStats',['../classqvv_1_1ViewportManager.html#a74110c28252f26687dedcb8d4eed552c',1,'qvv::ViewportManager']]],
+  ['getviewers_20',['GetViewers',['../classcontrollers_1_1SliceController.html#a534d863129ba62a51828f99453c986e4',1,'controllers::SliceController']]],
+  ['getviewportconfig_21',['GetViewportConfig',['../classqvv_1_1ViewportManager.html#a945b5a6db47015deb8c301a9cdb0a201',1,'qvv::ViewportManager']]],
+  ['getviewportcount_22',['GetViewportCount',['../classqvv_1_1ViewportManager.html#a63f2b950d80e3d55f89dc036f67e3934',1,'qvv::ViewportManager']]],
+  ['grid_23',['Grid',['../classqvv_1_1ViewportLayout.html#a692bcffa99b8e2e8afc3176be012b0b0',1,'qvv::ViewportLayout']]],
+  ['guarantee_24',['Deduplication guarantee',['../classrender_1_1RenderScheduler.html#autotoc_md2',1,'']]]
+];

@@ -1,0 +1,5 @@
+<map id="ui::ViewportPaneConfig" name="ui::ViewportPaneConfig">
+<area shape="rect" id="Node000001" title="Describes the viewport region and plane index for one pane in a layout." alt="" coords="5,93,177,119"/>
+<area shape="rect" id="Node000002" href="$structqvv_1_1ViewportConfig.html" title="Normalised coordinate and display settings for a single viewport." alt="" coords="15,5,167,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,45,94,93,89,93,89,45"/>
+</map>

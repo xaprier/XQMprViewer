@@ -1,0 +1,5 @@
+<map id="controllers::SliceController::RequestRenderAll" name="controllers::SliceController::RequestRenderAll">
+<area shape="rect" id="Node000001" title="Request a render for all registered RIV windows via the scheduler." alt="" coords="5,5,200,45"/>
+<area shape="rect" id="Node000002" href="$classrender_1_1RenderScheduler.html#aabea841bbbe87d708f716196ec43270d" title="Mark the target associated with window as needing a render." alt="" coords="248,5,431,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,23,234,23,234,28,200,28"/>
+</map>

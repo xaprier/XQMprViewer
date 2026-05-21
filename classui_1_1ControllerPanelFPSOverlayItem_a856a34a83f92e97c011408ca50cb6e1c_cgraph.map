@@ -1,0 +1,15 @@
+<map id="ui::ControllerPanelFPSOverlayItem::AddOverlay" name="ui::ControllerPanelFPSOverlayItem::AddOverlay">
+<area shape="rect" id="Node000001" title="Attach an overlay to be controlled by this panel." alt="" coords="5,165,221,205"/>
+<area shape="rect" id="Node000002" href="$classoverlays_1_1FPSOverlay.html#ab1d814276149bc5050c6198e85451475" title="Set the sliding&#45;window duration for FPS/frame&#45;time averaging (1–60 s)." alt="" coords="269,5,437,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,163,191,111,228,81,268,55,280,49,282,53,271,60,231,86,194,115,136,167"/>
+<area shape="rect" id="Node000003" href="$classoverlays_1_1FPSOverlay.html#accd1e71e6d87c78a83513c0b44da0b4a" title="Enable or disable the overlay." alt="" coords="273,69,434,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,163,268,119,286,112,288,117,270,124,163,168"/>
+<area shape="rect" id="Node000004" href="$classoverlays_1_1FPSOverlay.html#a6ef67cd97bea33f87d849869ee694016" title=" " alt="" coords="273,133,434,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="221,168,259,163,260,168,222,174"/>
+<area shape="rect" id="Node000005" href="$classoverlays_1_1FPSOverlay.html#a6cda920d7aa6caa7fc6d37178db18c43" title=" " alt="" coords="273,197,434,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="222,197,260,202,259,207,221,202"/>
+<area shape="rect" id="Node000006" href="$classoverlays_1_1FPSOverlay.html#a55a0ed68965ca2f4b7aba36a33d664f3" title="Set position for the visible overlay." alt="" coords="273,261,434,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="163,203,270,247,288,254,286,259,268,252,161,208"/>
+<area shape="rect" id="Node000007" href="$classoverlays_1_1FPSOverlay.html#a710419e889c972aa335cc034d85eec05" title=" " alt="" coords="273,325,434,365"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="136,203,194,256,231,285,271,311,282,317,280,322,268,316,228,289,191,260,133,207"/>
+</map>

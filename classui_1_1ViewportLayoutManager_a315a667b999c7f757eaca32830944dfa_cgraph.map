@@ -1,0 +1,7 @@
+<map id="ui::ViewportLayoutManager::ApplySlotAssignment" name="ui::ViewportLayoutManager::ApplySlotAssignment">
+<area shape="rect" id="Node000001" title="Re&#45;apply current layout with a custom slot→plane assignment." alt="" coords="5,35,207,75"/>
+<area shape="rect" id="Node000002" href="$classui_1_1ViewportLayoutManager.html#a1bff0bdb753eeb09550a963a39134325" title=" " alt="" coords="255,5,456,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,40,241,36,241,41,207,45"/>
+<area shape="rect" id="Node000003" href="$namespaceui.html#a5b82e5bba16ac006abde04674bcbb796" title="Factory: returns a fully populated ViewportLayoutDefinition for each type. If slotPlanes is non&#45;empty..." alt="" coords="263,70,447,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,63,250,68,249,73,207,69"/>
+</map>

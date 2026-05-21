@@ -1,0 +1,7 @@
+<map id="ui::ViewportLayoutSelector::ViewportLayoutSelector" name="ui::ViewportLayoutSelector::ViewportLayoutSelector">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,37,203,77"/>
+<area shape="rect" id="Node000002" href="$classui_1_1ViewportLayoutSelector.html#ac0531b2568ad32dd65f8075fe95ba946" title="Programmatically activates the button for type without emitting layoutSelected()." alt="" coords="252,5,449,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,42,238,37,239,43,203,47"/>
+<area shape="rect" id="Node000003" href="$classui_1_1ViewportLayoutSelector.html#a37dde702c667ea9e2e049ea0e5a6d0d1" title="Emitted when the user picks a new slot→plane assignment via right&#45;click on a layout button." alt="" coords="251,69,451,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,67,237,72,237,77,202,73"/>
+</map>

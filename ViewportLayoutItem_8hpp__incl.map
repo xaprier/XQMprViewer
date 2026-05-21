@@ -1,0 +1,20 @@
+<map id="src/ui/include/ui/ViewportLayoutItem.hpp" name="src/ui/include/ui/ViewportLayoutItem.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="79,5,266,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,135,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,48,98,87,94,83,146,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="141,167,204,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,46,175,153,170,153,170,46"/>
+<area shape="rect" id="Node000004" href="$ViewportLayoutTypes_8hpp.html" title=" " alt="" coords="210,93,415,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,43,281,84,279,89,205,48"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="291,121,209,163,206,158,289,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="535,240,591,265"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="393,116,483,136,521,149,546,165,556,179,563,195,567,226,562,227,557,196,552,181,543,169,519,154,482,141,392,121"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="219,240,278,265"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="303,121,286,142,270,168,260,198,254,227,249,226,254,196,265,166,281,139,299,117"/>
+<area shape="rect" id="Node000007" href="$ViewportConfig_8hpp.html" title=" " alt="" coords="280,167,532,192"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="329,117,382,156,378,160,326,121"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="432,190,526,232,524,237,430,194"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="382,194,288,237,286,232,380,190"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="307,240,505,265"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="409,192,409,226,403,226,403,192"/>
+</map>

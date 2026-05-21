@@ -1,0 +1,7 @@
+<map id="ui::ILayoutTarget" name="ui::ILayoutTarget">
+<area shape="rect" id="Node000001" title="Interface implemented by any view that can accept a runtime layout change." alt="" coords="103,5,234,31"/>
+<area shape="rect" id="Node000002" href="$classui_1_1MultiWindowView.html" title="View widget for multi&#45;window DICOM display." alt="" coords="5,79,164,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,42,100,80,97,76,143,38"/>
+<area shape="rect" id="Node000003" href="$classui_1_1ViewportView.html" title="View widget for single&#45;window multi&#45;viewport DICOM display." alt="" coords="188,79,320,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,37,242,76,238,80,191,41"/>
+</map>

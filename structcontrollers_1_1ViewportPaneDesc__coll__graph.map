@@ -1,0 +1,5 @@
+<map id="controllers::ViewportPaneDesc" name="controllers::ViewportPaneDesc">
+<area shape="rect" id="Node000001" title="Maps a viewport region to a slice&#45;plane renderer index." alt="" coords="5,93,225,119"/>
+<area shape="rect" id="Node000002" href="$structqvv_1_1ViewportConfig.html" title="Normalised coordinate and display settings for a single viewport." alt="" coords="39,5,191,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,45,118,93,113,93,113,45"/>
+</map>
