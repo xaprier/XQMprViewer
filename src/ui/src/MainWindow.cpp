@@ -4,6 +4,7 @@
 #include <vtkGenericOpenGLRenderWindow.h>
 
 #include <QDockWidget>
+#include <QFrame>
 #include <QHBoxLayout>
 #include <QMenu>
 #include <QMenuBar>
@@ -13,45 +14,68 @@
 #include <QWidget>
 
 #include "adapters/ColorAdapter.hpp"
+#include "adapters/DicomMetaDataAdapter.hpp"
 #include "controllers/DicomController.hpp"
 #include "controllers/MultiWindowController.hpp"
 #include "overlays/CornerAnnotationOverlay.hpp"
+#include "overlays/FPSOverlay.hpp"
+#include "overlays/OrientationMarkerOverlay.hpp"
 #include "ui/ControllerPanel.hpp"
 #include "ui/ControllerPanelCornerAnnotationItem.hpp"
 #include "ui/ControllerPanelSphereItem.hpp"
-#include "adapters/DicomMetaDataAdapter.hpp"
 #include "ui/DicomMetaDataPanel.hpp"
 #include "ui/MultiWindowView.hpp"
+#include "ui/OverlayLayoutAdapter.hpp"
+#include "ui/ViewportLayoutManager.hpp"
+#include "ui/ViewportLayoutSelector.hpp"
+#include "ui/ViewportLayoutTypes.hpp"
 #include "ui/ViewportView.hpp"
 
 namespace ui {
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
-      m_dicomController(new controllers::DicomController(this)) {
+      m_dicomController(new controllers::DicomController(this)),
+      m_layoutManager(std::make_unique<ViewportLayoutManager>(this)) {
     setWindowTitle("XQVtkViewport — Widgets Demo");
-    resize(1400, 800);
+    resize(1400, 860);
     _BuildUi();
     _ConnectSignals();
+    _ConnectLayoutSignals();
 }
 
 MainWindow::~MainWindow() = default;
 
 void MainWindow::_BuildUi() {
+    // ── Left dock: controller panel ──────────────────────────────────────────
     m_controllerPanel = new ControllerPanel(this);
     auto* leftDock = new QDockWidget(tr("Controller Panel"), this);
     leftDock->setWidget(m_controllerPanel);
-    leftDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    leftDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetMovable);
     leftDock->setMinimumWidth(220);
     leftDock->setMaximumWidth(280);
     addDockWidget(Qt::LeftDockWidgetArea, leftDock);
 
-    m_tabWidget = new QTabWidget(this);
-    setCentralWidget(m_tabWidget);
+    // ── Central area: layout selector + tab widget ───────────────────────────
+    // We wrap the tab widget and layout selector in a vertical layout inside
+    // a central container widget so the selector sits BELOW the tab bar.
+    auto* centralContainer = new QWidget(this);
+    auto* centralLayout = new QVBoxLayout(centralContainer);
+    centralLayout->setContentsMargins(0, 0, 0, 0);
+    centralLayout->setSpacing(0);
+
+    m_tabWidget = new QTabWidget(centralContainer);
+    centralLayout->addWidget(m_tabWidget, 1);
 
     _BuildViewportTab();
     _BuildMultiWindowTab();
+    _BuildLayoutPanel();
 
+    centralLayout->addWidget(m_layoutSelector);
+
+    setCentralWidget(centralContainer);
+
+    // ── Right dock: DICOM metadata ───────────────────────────────────────────
     m_metaDataAdapter = new adapters::DicomMetaDataAdapter(m_dicomController, this);
     m_metaDataPanel = new DicomMetaDataPanel(m_metaDataAdapter, this);
     auto* rightDock = new QDockWidget(tr("DICOM Metadata"), this);
@@ -65,8 +89,13 @@ void MainWindow::_BuildUi() {
     viewMenu->addAction(rightDock->toggleViewAction());
     viewMenu->addAction(leftDock->toggleViewAction());
 
-    // Register all corner annotation overlays with the controller panel item
-    // so their initial settings are applied immediately.
+    auto* layoutPanelAction = new QAction(tr("Layout Panel"), this);
+    layoutPanelAction->setCheckable(true);
+    layoutPanelAction->setChecked(true);
+    connect(layoutPanelAction, &QAction::toggled, m_layoutSelector, &QWidget::setVisible);
+    viewMenu->addAction(layoutPanelAction);
+
+    // Register all corner annotation overlays with their ControllerPanel item.
     auto* caItem = m_controllerPanel->GetCornerAnnotationItem();
     for (auto* ov : m_viewportView->GetOverlays<overlays::CornerAnnotationOverlay>())
         caItem->AddOverlay(ov);
@@ -83,8 +112,39 @@ void MainWindow::_BuildViewportTab() {
 
 void MainWindow::_BuildMultiWindowTab() {
     m_multiWindowView = new MultiWindowView(this);
-
     m_tabWidget->addTab(m_multiWindowView, "MultiWindow Mode");
+}
+
+void MainWindow::_BuildLayoutPanel() {
+    m_layoutSelector = new ViewportLayoutSelector(this);
+
+    // Register both views as layout targets.
+    m_layoutManager->RegisterTarget(m_viewportView);
+    m_layoutManager->RegisterTarget(m_multiWindowView);
+
+    // Build and register overlay adapters for ViewportView (shared-viewport mode).
+    {
+        auto adapter = std::make_unique<OverlayLayoutAdapter>(/*sharedViewport=*/true);
+        for (auto* ov : m_viewportView->GetOverlays<overlays::OrientationMarkerOverlay>())
+            adapter->AddOrientationMarkerOverlay(ov);
+        for (auto* ov : m_viewportView->GetOverlays<overlays::CornerAnnotationOverlay>())
+            adapter->AddCornerAnnotationOverlay(ov);
+        for (auto* ov : m_viewportView->GetOverlays<overlays::FPSOverlay>())
+            adapter->AddFPSOverlay(ov);
+        m_layoutManager->RegisterOverlayAdapter(std::move(adapter));
+    }
+
+    // Build and register overlay adapters for MultiWindowView (per-widget mode).
+    {
+        auto adapter = std::make_unique<OverlayLayoutAdapter>(/*sharedViewport=*/false);
+        for (auto* ov : m_multiWindowView->GetOverlays<overlays::OrientationMarkerOverlay>())
+            adapter->AddOrientationMarkerOverlay(ov);
+        for (auto* ov : m_multiWindowView->GetOverlays<overlays::CornerAnnotationOverlay>())
+            adapter->AddCornerAnnotationOverlay(ov);
+        for (auto* ov : m_multiWindowView->GetOverlays<overlays::FPSOverlay>())
+            adapter->AddFPSOverlay(ov);
+        m_layoutManager->RegisterOverlayAdapter(std::move(adapter));
+    }
 }
 
 void MainWindow::_ConnectSignals() {
@@ -122,13 +182,10 @@ void MainWindow::_ConnectSignals() {
         m_multiWindowView->GetController()->SetSphereColor(rgb);
     });
 
-    // Statuses
     connect(m_dicomController, &controllers::DicomController::StatusChanged, this, [this](const QString& message) {
-        QString fullMessage = "DICOM: " + message;
-        _Notification(fullMessage);
+        _Notification("DICOM: " + message);
     });
 
-    // IViewController::SetImageData signal from DicomController is connected to MultiWindowController, which will trigger renders in both views.
     connect(m_dicomController, &controllers::DicomController::ImageDataReady,
             m_multiWindowView->GetController(), &controllers::MultiWindowController::SetImageData);
 
@@ -148,8 +205,10 @@ void MainWindow::_ConnectSignals() {
         _ForEachOverlay<overlays::FPSOverlay>([fontSize](auto* ov) { ov->SetFontSize(fontSize); });
     });
 
+    // Orientation marker signals: forward to overlays AND notify layout manager
+    // so it can recompute combined (userEnabled && layoutVisible) state.
     connect(m_controllerPanel, &ControllerPanel::OrientationMarkerEnableChanged, this, [this](bool enabled) {
-        _ForEachOverlay<overlays::OrientationMarkerOverlay>([enabled](auto* ov) { ov->SetEnabled(enabled); });
+        m_layoutManager->SetOrientationMarkersEnabled(enabled);
     });
     connect(m_controllerPanel, &ControllerPanel::OrientationMarkerColorChanged, this, [this](const QColor& color) {
         _ForEachOverlay<overlays::OrientationMarkerOverlay>([&color](auto* ov) { ov->SetTextColor(color); });
@@ -161,8 +220,9 @@ void MainWindow::_ConnectSignals() {
         _ForEachOverlay<overlays::OrientationMarkerOverlay>([fontSize](auto* ov) { ov->SetFontSize(fontSize); });
     });
 
+    // Corner annotation enable goes through layout manager too.
     connect(m_controllerPanel, &ControllerPanel::CornerAnnotationEnableChanged, this, [this](bool enabled) {
-        _ForEachOverlay<overlays::CornerAnnotationOverlay>([enabled](auto* ov) { ov->SetEnabled(enabled); });
+        m_layoutManager->SetCornerAnnotationsEnabled(enabled);
     });
     connect(m_controllerPanel, &ControllerPanel::CornerAnnotationPositionChanged, this, [this](const overlays::OverlayPosition& position) {
         _ForEachOverlay<overlays::CornerAnnotationOverlay>([&position](auto* ov) { ov->SetPosition(position); });
@@ -197,6 +257,25 @@ void MainWindow::_ConnectSignals() {
         _Notification("MultiWindow: " + message);
     });
 }
+
+void MainWindow::_ConnectLayoutSignals() {
+    // Layout selector → manager
+    connect(m_layoutSelector, &ViewportLayoutSelector::layoutSelected,
+            m_layoutManager.get(), &ViewportLayoutManager::ApplyLayout);
+
+    // Right-click slot assignment → manager
+    connect(m_layoutSelector, &ViewportLayoutSelector::slotAssignmentRequested,
+            m_layoutManager.get(), &ViewportLayoutManager::ApplySlotAssignment);
+
+    // Keep selector highlight in sync if layout is changed programmatically.
+    // Also update the active button's definition so pane colors reflect the assignment.
+    connect(m_layoutManager.get(), &ViewportLayoutManager::layoutChanged,
+            this, [this](const ViewportLayoutDefinition& def) {
+                m_layoutSelector->SetActiveLayout(def.type);
+                m_layoutSelector->UpdateActiveDefinition(def);
+            });
+}
+
 void MainWindow::_Notification(const QString& message) {
     statusBar()->showMessage(message);
 }

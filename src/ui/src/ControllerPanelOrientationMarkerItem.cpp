@@ -1,7 +1,5 @@
 #include "ui/ControllerPanelOrientationMarkerItem.hpp"
 
-#include <qboxlayout.h>
-
 #include <QCheckBox>
 #include <QColorDialog>
 #include <QFormLayout>
@@ -36,18 +34,14 @@ void ControllerPanelOrientationMarkerItem::ClearOverlays() {
 void ControllerPanelOrientationMarkerItem::_setupUi() {
     auto* group = new QGroupBox(tr("Orientation Markers"), this);
     auto* form = new QFormLayout(group);
-    QHBoxLayout* hb = new QHBoxLayout();  // for grouping check boxes in 2 columns 1 row
     form->setSpacing(4);
 
-    m_enableCheck = new QCheckBox(tr("Enable"), group);
+    m_enableCheck = new QCheckBox(this);
     m_enableCheck->setChecked(true);
 
-    m_longLabelsCheck = new QCheckBox(tr("Long labels"), group);
+    m_longLabelsCheck = new QCheckBox(this);
     m_longLabelsCheck->setChecked(false);
     m_longLabelsCheck->setToolTip(tr("Show full names (Left/Right/…) instead of abbreviations (L/R/…)"));
-
-    hb->addWidget(m_enableCheck);
-    hb->addWidget(m_longLabelsCheck);
 
     m_fontSizeSpin = new QSpinBox(group);
     m_fontSizeSpin->setRange(6, 48);
@@ -60,8 +54,9 @@ void ControllerPanelOrientationMarkerItem::_setupUi() {
         QString("background-color: %1;").arg(m_textColor.name()));
     m_colorButton->setToolTip(tr("Pick label color"));
 
-    form->addRow(hb);
-    form->addRow(tr("Font size:"), m_fontSizeSpin);
+    form->addRow(tr("Enable:"),      m_enableCheck);
+    form->addRow(tr("Long labels:"), m_longLabelsCheck);
+    form->addRow(tr("Font size:"),   m_fontSizeSpin);
     form->addRow(tr("Label color:"), m_colorButton);
 
     auto* outer = new QVBoxLayout(this);

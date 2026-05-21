@@ -60,11 +60,12 @@ class CornerAnnotationOverlay : public QWidget, public IOverlay {
 
     // ── Shared-viewport clipping ──────────────────────────────────────────────
     /**
-     * @brief Restrict painting to the horizontal sub-region [xMin, xMax] ∈ [0, 1].
+     * @brief Restrict painting to a normalised sub-rectangle of the host widget.
      *
-     * Default (0.0, 1.0) covers the full widget width.
+     * Coordinates are in Qt space (top-left origin, y grows downward), all in [0, 1].
+     * Default (0, 0, 1, 1) covers the full widget.
      */
-    void SetViewportFraction(double xMin, double xMax);
+    void SetViewportRect(double xMin, double yMin, double xMax, double yMax);
 
   protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
@@ -95,7 +96,9 @@ class CornerAnnotationOverlay : public QWidget, public IOverlay {
     bool m_showViewName{true};
 
     double m_vpXMin{0.0};
+    double m_vpYMin{0.0};
     double m_vpXMax{1.0};
+    double m_vpYMax{1.0};
 
     mutable QFont        m_cachedFont;
     mutable QFontMetrics m_cachedMetrics{m_cachedFont};

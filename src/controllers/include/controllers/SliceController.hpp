@@ -78,6 +78,14 @@ class SliceController : public IControllerBase {
     /** @brief Exposes the scheduler so parent controllers can call Flush(). */
     render::RenderScheduler* Scheduler() const;
 
+    /**
+     * @brief Fit each plane's camera to fill its viewport exactly.
+     *
+     * Safe to call at any time; no-ops if image data is not yet loaded.
+     * Call after viewport geometry changes (layout switch) to avoid letterboxing.
+     */
+    void FitToView();
+
   public slots:
     /** @brief Scrolls each slice plane to the position nearest to @p worldPos. */
     void OnSphereUpdated(const Vec3& worldPos);
@@ -85,7 +93,6 @@ class SliceController : public IControllerBase {
   private:
     void SetupViewers();
     void SetupPipeline();
-    void FitToView();
 
     vtkSmartPointer<vtkImageData> m_image;
     vtkSmartPointer<ResliceImageViewerInteractorStyle> m_rivStyle;  // null in viewport mode

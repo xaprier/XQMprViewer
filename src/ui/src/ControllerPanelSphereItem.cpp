@@ -1,13 +1,10 @@
 #include "ui/ControllerPanelSphereItem.hpp"
 
-#include <QCheckBox>
 #include <QColor>
 #include <QColorDialog>
 #include <QDoubleSpinBox>
 #include <QFormLayout>
 #include <QGroupBox>
-#include <QHBoxLayout>
-#include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
 
@@ -33,25 +30,22 @@ void ControllerPanelSphereItem::_setupUi() {
     auto* form = new QFormLayout(group);
     form->setSpacing(4);
 
-    m_enableButton = new QPushButton(tr("Add/Remove Sphere"), this);
+    m_enableButton = new QPushButton(tr("Add / Remove Sphere"), this);
 
-    auto* radiusRow = new QHBoxLayout;
-    auto* radiusLabel = new QLabel(tr("Radius"), this);
     m_radiusSpin = new QDoubleSpinBox(this);
     m_radiusSpin->setRange(0.5, 50.0);
     m_radiusSpin->setDecimals(1);
     m_radiusSpin->setSingleStep(0.5);
     m_radiusSpin->setValue(3.0);
-    radiusRow->addWidget(radiusLabel);
-    radiusRow->addWidget(m_radiusSpin, 1);
 
-    m_colorButton = new QPushButton(tr("Color"), this);
-    m_colorButton->setAutoFillBackground(true);
-    m_colorButton->setStyleSheet(QString("background-color: %1").arg(m_color.name()));
+    m_colorButton = new QPushButton(this);
+    m_colorButton->setFixedHeight(22);
+    m_colorButton->setToolTip(tr("Pick sphere color"));
+    m_colorButton->setStyleSheet(QString("background-color: %1;").arg(m_color.name()));
 
     form->addRow(m_enableButton);
-    form->addRow(radiusRow);
-    form->addRow(m_colorButton);
+    form->addRow(tr("Radius:"), m_radiusSpin);
+    form->addRow(tr("Color:"),  m_colorButton);
 
     auto* outer = new QVBoxLayout(this);
     outer->setContentsMargins(0, 0, 0, 0);

@@ -74,15 +74,12 @@ class OrientationMarkerOverlay : public QWidget, public IOverlay {
     void SetSliceOrientation(SliceOrientation orientation);
 
     /**
-     * @brief Restrict painting to a horizontal sub-region of the host widget.
+     * @brief Restrict painting to a normalised sub-rectangle of the host widget.
      *
-     * Used in shared-viewport mode where several renderers share one widget.
-     * @param xMin  Normalised left edge  [0.0, 1.0]
-     * @param xMax  Normalised right edge [0.0, 1.0]
-     *
-     * Default (0.0, 1.0) paints across the full widget width.
+     * Coordinates are in Qt space (top-left origin, y grows downward), all in [0, 1].
+     * Default (0, 0, 1, 1) covers the full widget.
      */
-    void SetViewportFraction(double xMin, double xMax);
+    void SetViewportRect(double xMin, double yMin, double xMax, double yMax);
 
   protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
@@ -101,7 +98,8 @@ class OrientationMarkerOverlay : public QWidget, public IOverlay {
 
     void _DrawLabel(QPainter& p, const QFontMetrics& fm,
                     const QString& text, Qt::Alignment align,
-                    int vpLeft, int vpRight, int vpW, int totalH) const;
+                    int vpLeft, int vpTop, int vpRight, int vpBot,
+                    int vpW, int vpH) const;
 
     QVTKOpenGLNativeWidget* m_host{nullptr};
     SliceOrientation m_orientation{SliceOrientation::Axial};
@@ -115,9 +113,11 @@ class OrientationMarkerOverlay : public QWidget, public IOverlay {
     mutable QFontMetrics m_cachedMetrics{m_cachedFont};
     mutable bool m_fontDirty{true};
 
-    // Horizontal sub-region for shared-viewport mode [0, 1].
+    // Sub-rectangle for shared-viewport mode (Qt coords, top-left origin) [0, 1].
     double m_vpXMin{0.0};
+    double m_vpYMin{0.0};
     double m_vpXMax{1.0};
+    double m_vpYMax{1.0};
 };
 
 }  // namespace overlays

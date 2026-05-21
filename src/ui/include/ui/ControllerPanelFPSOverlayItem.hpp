@@ -49,6 +49,7 @@ class ControllerPanelFPSOverlayItem : public QWidget {
     void FPSOverlayPositionChanged(const overlays::OverlayPosition& position);
     void FPSOverlayMarginChanged(int margin);
     void FPSOverlayFontSizeChanged(int fontSize);
+    void FPSOverlayAvgWindowChanged(int seconds);
 
   private:
     void _setupUi();
@@ -58,11 +59,13 @@ class ControllerPanelFPSOverlayItem : public QWidget {
     void _onMarginChanged(int px);
     void _onFontSizeChanged(int pt);
     void _onColorPicked();
+    void _onAvgWindowChanged(int seconds);
 
     QCheckBox* m_enableCheck{nullptr};
     QComboBox* m_positionCombo{nullptr};
     QSpinBox* m_marginSpin{nullptr};
     QSpinBox* m_fontSizeSpin{nullptr};
+    QSpinBox* m_avgWindowSpin{nullptr};
     QPushButton* m_colorButton{nullptr};
 
     QColor m_textColor{Qt::yellow};

@@ -26,14 +26,6 @@ SphereController::SphereController(QObject* parent)
     m_sphereSource->SetPhiResolution(16);
     m_sphereSource->SetRadius(3.0);
 
-    auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapper->SetInputConnection(m_sphereSource->GetOutputPort());
-
-    m_actor = vtkSmartPointer<vtkActor>::New();
-    m_actor->SetMapper(mapper);
-    m_actor->GetProperty()->SetColor(1.0, 0.3, 0.3);
-    m_actor->GetProperty()->SetOpacity(0.85);
-
     m_picker = vtkSmartPointer<vtkCellPicker>::New();
     m_picker->SetTolerance(0.005);
 
@@ -63,8 +55,16 @@ void SphereController::AddRenderer(vtkSmartPointer<vtkRenderer> renderer, DragPl
             return;
     }
 
-    renderer->AddActor(m_actor);
-    m_rendererEntries.push_back({renderer, plane});
+    auto mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapper->SetInputConnection(m_sphereSource->GetOutputPort());
+
+    auto actor = vtkSmartPointer<vtkActor>::New();
+    actor->SetMapper(mapper);
+    actor->GetProperty()->SetColor(1.0, 0.3, 0.3);
+    actor->GetProperty()->SetOpacity(0.85);
+
+    renderer->AddActor(actor);
+    m_rendererEntries.push_back({renderer, actor, plane});
 }
 
 void SphereController::AddInteractor(vtkSmartPointer<vtkRenderWindowInteractor> interactor) {
@@ -88,7 +88,7 @@ void SphereController::AddInteractor(vtkSmartPointer<vtkRenderWindowInteractor> 
 void SphereController::Cleanup() {
     for (const auto& e : m_rendererEntries)
         if (e.renderer)
-            e.renderer->RemoveActor(m_actor);
+            e.renderer->RemoveActor(e.actor);
 
     for (auto& interactor : m_interactors) {
         if (!interactor)
@@ -110,7 +110,9 @@ void SphereController::SetPosition(const Vec3& pos) {
     qDebug() << "SphereController::SetPosition: Setting sphere position to:" << pos[0] << pos[1] << pos[2];
     m_sphereSource->SetCenter(pos[0], pos[1], pos[2]);
     m_sphereSource->Update();
-    m_actor->Modified();  // Ensure mapper updates to reflect new geometry
+    for (auto& entry : m_rendererEntries) {
+        entry.actor->Modified();
+    }
     emit SphereMoved(pos);
 }
 
@@ -118,13 +120,17 @@ void SphereController::SetRadius(double radius) {
     qDebug() << "SphereController::SetRadius: Setting sphere radius to:" << radius;
     m_sphereSource->SetRadius(radius);
     m_sphereSource->Update();
-    m_actor->Modified();  // Ensure mapper updates to reflect new geometry
+    for (auto& entry : m_rendererEntries) {
+        entry.actor->Modified();
+    }
 }
 
 void SphereController::SetColor(const Vec3& rgb) {
     qDebug() << "SphereController::SetColor: Setting sphere color to:" << rgb[0] << rgb[1] << rgb[2];
-    m_actor->GetProperty()->SetColor(rgb[0], rgb[1], rgb[2]);
-    m_actor->Modified();  // Ensure mapper updates to reflect new geometry
+    for (auto& entry : m_rendererEntries) {
+        entry.actor->GetProperty()->SetColor(rgb[0], rgb[1], rgb[2]);
+        entry.actor->Modified();
+    }
 }
 
 // ── Getters ───────────────────────────────────────────────────────────────────
@@ -141,12 +147,23 @@ SphereController::Vec3 SphereController::GetPosition() const {
 
 SphereController::Vec3 SphereController::GetColor() const {
     double rgb[3];
-    m_actor->GetProperty()->GetColor(rgb);
+    auto actor = m_rendererEntries.front().actor;
+    actor->GetProperty()->GetColor(rgb);
     return {rgb[0], rgb[1], rgb[2]};
 }
 
 bool SphereController::IsDragging() const {
     return m_isDragging;
+}
+
+vtkActor* SphereController::ActorFor(vtkRenderer* renderer) const {
+    for (auto& entry : m_rendererEntries) {
+        if (entry.renderer == renderer) {
+            return entry.actor;
+        }
+    }
+
+    return nullptr;
 }
 
 // ── Private helpers ───────────────────────────────────────────────────────────
@@ -189,6 +206,9 @@ void SphereController::RenderAll() {
 
 void SphereController::OnLeftButtonDown(vtkObject* caller, unsigned long, void* clientData, void*) {
     auto* self = static_cast<SphereController*>(clientData);
+
+    self->m_leftDownCmd->SetAbortFlag(0);  // important
+
     auto* interactor = vtkRenderWindowInteractor::SafeDownCast(caller);
     if (!interactor)
         return;
@@ -205,7 +225,8 @@ void SphereController::OnLeftButtonDown(vtkObject* caller, unsigned long, void* 
 
     self->m_picker->Pick(pos[0], pos[1], 0.0, renderer);
 
-    if (self->m_picker->GetActor() != self->m_actor.Get())
+    auto* expectedActor = self->ActorFor(renderer);
+    if (self->m_picker->GetActor() != expectedActor)
         return;
 
     self->m_isDragging = true;
@@ -273,7 +294,9 @@ void SphereController::OnMouseMove(vtkObject* caller, unsigned long, void* clien
 
     self->SetPosition({intersect[0], intersect[1], intersect[2]});
     // Abort so the style doesn't do window/level simultaneously with sphere drag.
-    self->m_mouseMoveCmd->SetAbortFlag(1);
+    // SetPosition emits SphereMoved → SliceController::OnSphereUpdated → RenderAll,
+    // so the scheduler already has a pending flush; no extra render call needed here.
+    // self->m_mouseMoveCmd->SetAbortFlag(1);
 }
 
 void SphereController::OnLeftButtonUp(vtkObject*, unsigned long, void* clientData, void*) {

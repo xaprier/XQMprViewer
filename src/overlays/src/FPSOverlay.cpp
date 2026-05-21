@@ -73,17 +73,33 @@ void FPSOverlay::resizeEvent(QResizeEvent* event) {
         _Reposition();
 }
 
+void FPSOverlay::SetAveragingWindow(int seconds) {
+    m_windowNs = static_cast<qint64>(qBound(1, seconds, 60)) * 1'000'000'000LL;
+    m_frameTimestamps.clear();
+    m_lastFrameNs = 0;
+}
+
 void FPSOverlay::_OnFrameSwapped() {
-    qint64 nowNs = m_frameTimer.nsecsElapsed();
-    qint64 elapsedNs = nowNs - m_lastFrameNs;
+    const qint64 nowNs = m_frameTimer.nsecsElapsed();
+
+    if (m_lastFrameNs > 0) {
+        m_frameTimestamps.push_back(nowNs);
+
+        // Drop timestamps older than the averaging window.
+        const qint64 cutoff = nowNs - m_windowNs;
+        while (!m_frameTimestamps.empty() && m_frameTimestamps.front() < cutoff)
+            m_frameTimestamps.pop_front();
+
+        if (m_frameTimestamps.size() >= 2) {
+            const qint64 spanNs = m_frameTimestamps.back() - m_frameTimestamps.front();
+            const int frames = static_cast<int>(m_frameTimestamps.size()) - 1;
+            const double avgFrameMs = static_cast<double>(spanNs) / frames / 1'000'000.0;
+            const double avgFps = frames * 1'000'000'000.0 / static_cast<double>(spanNs);
+            _UpdateText(avgFrameMs, avgFps);
+        }
+    }
+
     m_lastFrameNs = nowNs;
-
-    if (elapsedNs <= 0)
-        return;
-
-    double frameMs = static_cast<double>(elapsedNs) / 1'000'000.0;
-    double fps = 1'000.0 / frameMs;
-    _UpdateText(frameMs, fps);
 }
 
 void FPSOverlay::_UpdateText(double frameMs, double fps) {

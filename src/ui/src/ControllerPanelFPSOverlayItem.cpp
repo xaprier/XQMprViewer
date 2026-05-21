@@ -30,6 +30,7 @@ void ControllerPanelFPSOverlayItem::AddOverlay(overlays::FPSOverlay* overlay) {
     overlay->SetMargin(m_marginSpin->value());
     overlay->SetFontSize(m_fontSizeSpin->value());
     overlay->SetTextColor(m_textColor);
+    overlay->SetAveragingWindow(m_avgWindowSpin->value());
 }
 
 void ControllerPanelFPSOverlayItem::ClearOverlays() {
@@ -41,7 +42,7 @@ void ControllerPanelFPSOverlayItem::_setupUi() {
     auto* form = new QFormLayout(group);
     form->setSpacing(4);
 
-    m_enableCheck = new QCheckBox(tr("Enable"), group);
+    m_enableCheck = new QCheckBox(group);
     m_enableCheck->setChecked(true);
 
     m_positionCombo = new QComboBox(group);
@@ -57,16 +58,23 @@ void ControllerPanelFPSOverlayItem::_setupUi() {
     m_fontSizeSpin->setValue(10);
     m_fontSizeSpin->setSuffix(" pt");
 
+    m_avgWindowSpin = new QSpinBox(group);
+    m_avgWindowSpin->setRange(1, 10);
+    m_avgWindowSpin->setValue(1);
+    m_avgWindowSpin->setSuffix(tr(" s"));
+    m_avgWindowSpin->setToolTip(tr("Averaging window duration for FPS and frame time"));
+
     m_colorButton = new QPushButton(group);
     m_colorButton->setFixedHeight(22);
     m_colorButton->setStyleSheet(
         QString("background-color: %1;").arg(m_textColor.name()));
     m_colorButton->setToolTip(tr("Pick text color"));
 
-    form->addRow(m_enableCheck);
-    form->addRow(tr("Position:"), m_positionCombo);
-    form->addRow(tr("Margin:"), m_marginSpin);
+    form->addRow(tr("Enable:"),    m_enableCheck);
+    form->addRow(tr("Position:"),  m_positionCombo);
+    form->addRow(tr("Margin:"),    m_marginSpin);
     form->addRow(tr("Font size:"), m_fontSizeSpin);
+    form->addRow(tr("Avg window:"), m_avgWindowSpin);
     form->addRow(tr("Text color:"), m_colorButton);
 
     auto* outer = new QVBoxLayout(this);
@@ -81,6 +89,8 @@ void ControllerPanelFPSOverlayItem::_setupUi() {
             this, &ControllerPanelFPSOverlayItem::_onMarginChanged);
     connect(m_fontSizeSpin, qOverload<int>(&QSpinBox::valueChanged),
             this, &ControllerPanelFPSOverlayItem::_onFontSizeChanged);
+    connect(m_avgWindowSpin, qOverload<int>(&QSpinBox::valueChanged),
+            this, &ControllerPanelFPSOverlayItem::_onAvgWindowChanged);
     connect(m_colorButton, &QPushButton::clicked,
             this, &ControllerPanelFPSOverlayItem::_onColorPicked);
 }
@@ -112,6 +122,12 @@ void ControllerPanelFPSOverlayItem::_onFontSizeChanged(int pt) {
         ov->SetFontSize(pt);
 
     emit FPSOverlayFontSizeChanged(pt);
+}
+
+void ControllerPanelFPSOverlayItem::_onAvgWindowChanged(int seconds) {
+    for (auto* ov : m_overlays)
+        ov->SetAveragingWindow(seconds);
+    emit FPSOverlayAvgWindowChanged(seconds);
 }
 
 void ControllerPanelFPSOverlayItem::_onColorPicked() {

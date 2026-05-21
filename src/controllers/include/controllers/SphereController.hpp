@@ -70,6 +70,7 @@ class SphereController : public IControllerBase {
     [[nodiscard]] Vec3 GetPosition() const;
     [[nodiscard]] Vec3 GetColor() const;
     [[nodiscard]] bool IsDragging() const;
+    [[nodiscard]] vtkActor* ActorFor(vtkRenderer*) const;
 
   Q_SIGNALS:
     void SphereMoved(const Vec3& worldPos);
@@ -77,6 +78,7 @@ class SphereController : public IControllerBase {
   private:
     struct RendererEntry {
         vtkSmartPointer<vtkRenderer> renderer;
+        vtkSmartPointer<vtkActor> actor;
         DragPlane plane;
     };
 
@@ -88,7 +90,6 @@ class SphereController : public IControllerBase {
     static void OnLeftButtonUp(vtkObject*, unsigned long, void* clientData, void*);
 
     vtkSmartPointer<vtkSphereSource> m_sphereSource;
-    vtkSmartPointer<vtkActor> m_actor;
     vtkSmartPointer<vtkCellPicker> m_picker;
     vtkSmartPointer<vtkCallbackCommand> m_leftDownCmd;
     vtkSmartPointer<vtkCallbackCommand> m_mouseMoveCmd;

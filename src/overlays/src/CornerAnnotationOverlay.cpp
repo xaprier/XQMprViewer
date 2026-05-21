@@ -4,7 +4,6 @@
 #include <vtkImageActor.h>
 #include <vtkImageData.h>
 #include <vtkImageProperty.h>
-#include <vtkImageViewer2.h>
 #include <vtkResliceImageViewer.h>
 
 #include <QEvent>
@@ -123,11 +122,14 @@ void CornerAnnotationOverlay::SetShowViewName(bool show) {
 
 // ── Shared-viewport clipping ──────────────────────────────────────────────────
 
-void CornerAnnotationOverlay::SetViewportFraction(double xMin, double xMax) {
-    if (m_vpXMin == xMin && m_vpXMax == xMax)
+void CornerAnnotationOverlay::SetViewportRect(double xMin, double yMin,
+                                              double xMax, double yMax) {
+    if (m_vpXMin == xMin && m_vpYMin == yMin && m_vpXMax == xMax && m_vpYMax == yMax)
         return;
     m_vpXMin = xMin;
+    m_vpYMin = yMin;
     m_vpXMax = xMax;
+    m_vpYMax = yMax;
     _Reposition();
 }
 
@@ -183,43 +185,46 @@ void CornerAnnotationOverlay::paintEvent(QPaintEvent* /*event*/) {
     const int totalW  = width();
     const int totalH  = height();
     const int vpLeft  = static_cast<int>(m_vpXMin * totalW);
+    const int vpTop   = static_cast<int>(m_vpYMin * totalH);
     const int vpRight = static_cast<int>(m_vpXMax * totalW);
+    const int vpBot   = static_cast<int>(m_vpYMax * totalH);
     const int vpW     = vpRight - vpLeft;
-    if (vpW <= 0 || totalH <= 0)
+    const int vpH     = vpBot   - vpTop;
+    if (vpW <= 0 || vpH <= 0)
         return;
 
-    // Block origin from position (same logic as FPSOverlay::_Reposition)
+    // Block origin from position
     int bx = 0, by = 0;
     switch (m_position) {
         case OverlayPosition::TopLeft:
             bx = vpLeft  + m_margin;
-            by = m_margin;
+            by = vpTop   + m_margin;
             break;
         case OverlayPosition::TopRight:
             bx = vpRight - maxW - m_margin;
-            by = m_margin;
+            by = vpTop   + m_margin;
             break;
         case OverlayPosition::TopCenter:
             bx = vpLeft  + (vpW - maxW) / 2;
-            by = m_margin;
+            by = vpTop   + m_margin;
             break;
         case OverlayPosition::BottomLeft:
             bx = vpLeft  + m_margin;
-            by = totalH - blockH - m_margin;
+            by = vpBot   - blockH - m_margin;
             break;
         case OverlayPosition::BottomRight:
             bx = vpRight - maxW - m_margin;
-            by = totalH - blockH - m_margin;
+            by = vpBot   - blockH - m_margin;
             break;
         case OverlayPosition::BottomCenter:
             bx = vpLeft  + (vpW - maxW) / 2;
-            by = totalH - blockH - m_margin;
+            by = vpBot   - blockH - m_margin;
             break;
     }
 
     QPainter p(this);
     p.setRenderHint(QPainter::TextAntialiasing);
-    p.setClipRect(vpLeft, 0, vpW, totalH);
+    p.setClipRect(vpLeft, vpTop, vpW, vpH);
     p.setFont(m_cachedFont);
 
     // Semi-transparent background box — same style as FPSOverlay.

@@ -37,6 +37,9 @@ bool ViewportInteractorStyle::_UpdateActiveViewer() {
             continue;
 
         auto* renderer = riv->GetRenderer();
+        if (!renderer || !renderer->GetDraw())
+            continue;
+
         double vp[4];
         renderer->GetViewport(vp);
 
