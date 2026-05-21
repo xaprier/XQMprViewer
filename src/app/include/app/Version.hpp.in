@@ -1,0 +1,21 @@
+#ifndef XQVtkViewport_APP_VERSION_HPP
+#define XQVtkViewport_APP_VERSION_HPP
+
+namespace app {
+
+struct Version {
+    static constexpr const char* kAppName      = "@PROJECT_NAME@";
+    static constexpr const char* kVersion      = "@PROJECT_VERSION@";
+    static constexpr const char* kOrganization = "@PROJECT_ORGANIZATION@";
+    static constexpr const char* kDescription  = "@PROJECT_DESCRIPTION@";
+    static constexpr const char* kHomepageUrl   = "@PROJECT_HOMEPAGE_URL@";
+    static constexpr const char* kDocumentation = "@PROJECT_DOCUMENTATION@";
+
+    static constexpr int kVersionMajor = @PROJECT_VERSION_MAJOR@;
+    static constexpr int kVersionMinor = @PROJECT_VERSION_MINOR@;
+    static constexpr int kVersionPatch = @PROJECT_VERSION_PATCH@;
+};
+
+}  // namespace app
+
+#endif  // XQVtkViewport_APP_VERSION_HPP

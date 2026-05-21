@@ -12,7 +12,7 @@ class CornerAnnotationOverlay;
 class FPSOverlay;
 }  // namespace overlays
 
-namespace ui {
+namespace adapters {
 
 /**
  * @brief Bridges the layout system and the overlay system for one IView.
@@ -52,7 +52,7 @@ class OverlayLayoutAdapter {
      * Updates viewport fractions (shared-viewport mode) and widget visibility
      * for all registered overlays. User-enable state is preserved.
      */
-    void Sync(const ViewportLayoutDefinition& def);
+    void Sync(const ui::ViewportLayoutDefinition& def);
 
     /**
      * @brief Notify the adapter that the user has toggled orientation marker
@@ -74,17 +74,17 @@ class OverlayLayoutAdapter {
 
     void _ApplyVisibility(overlays::OrientationMarkerOverlay* ov,
                           bool userEnabled, bool layoutVisible,
-                          const ViewportPaneConfig* pane);
+                          const ui::ViewportPaneConfig* pane);
     void _ApplyVisibility(overlays::CornerAnnotationOverlay* ov,
                           bool userEnabled, bool layoutVisible,
-                          const ViewportPaneConfig* pane);
+                          const ui::ViewportPaneConfig* pane);
 
     bool m_sharedViewport{true};
 
     // Per-plane pointers (index = planeIndex).
     std::vector<overlays::OrientationMarkerOverlay*> m_orientationOverlays;
-    std::vector<overlays::CornerAnnotationOverlay*>  m_cornerAnnotationOverlays;
-    std::vector<overlays::FPSOverlay*>               m_fpsOverlays;
+    std::vector<overlays::CornerAnnotationOverlay*> m_cornerAnnotationOverlays;
+    std::vector<overlays::FPSOverlay*> m_fpsOverlays;
 
     // User-enable cache: true = user wants to see this overlay.
     // Initialised to true (overlays are visible by default).
@@ -95,12 +95,12 @@ class OverlayLayoutAdapter {
     std::array<bool, kNumPlanes> m_layoutVisible{true, true, true};
 
     // Current pane configs (for fraction re-application on user-enable toggle).
-    std::array<const ViewportPaneConfig*, kNumPlanes> m_currentPane{nullptr, nullptr, nullptr};
+    std::array<const ui::ViewportPaneConfig*, kNumPlanes> m_currentPane{nullptr, nullptr, nullptr};
 
     // Storage for pane configs (copied from layout definition during Sync).
-    std::array<ViewportPaneConfig, kNumPlanes> m_paneStorage{};
+    std::array<ui::ViewportPaneConfig, kNumPlanes> m_paneStorage{};
 };
 
-}  // namespace ui
+}  // namespace adapters
 
 #endif  // OVERLAYLAYOUTADAPTER_HPP

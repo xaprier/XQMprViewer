@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
 
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/app/include/app/Version.hpp.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/app/include/app/Version.hpp"
+    @ONLY
+)
+
 file (GLOB_RECURSE CPP_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/adapters/src/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/app/src/*.cpp"
@@ -27,6 +33,7 @@ target_include_directories(XQVtkViewport_Widgets
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/adapters/include
         ${CMAKE_CURRENT_SOURCE_DIR}/app/include
+        ${CMAKE_CURRENT_BINARY_DIR}/app/include
         ${CMAKE_CURRENT_SOURCE_DIR}/controllers/include
         ${CMAKE_CURRENT_SOURCE_DIR}/overlays/include
         ${CMAKE_CURRENT_SOURCE_DIR}/render/include
