@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include "ui/OverlayLayoutAdapter.hpp"
+#include "adapters/OverlayLayoutAdapter.hpp"
 #include "ui/ViewportLayoutTypes.hpp"
 
 namespace ui {
@@ -51,7 +51,7 @@ class ViewportLayoutManager : public QObject {
      *
      * Ownership is transferred to the manager.
      */
-    void RegisterOverlayAdapter(std::unique_ptr<OverlayLayoutAdapter> adapter);
+    void RegisterOverlayAdapter(std::unique_ptr<adapters::OverlayLayoutAdapter> adapter);
 
     // ── Overlay user-enable forwarding ────────────────────────────────────────
 
@@ -94,7 +94,7 @@ class ViewportLayoutManager : public QObject {
 
     ViewportLayoutDefinition m_current{MakeLayoutDefinition(ViewportLayoutType::HorizontalSplit)};
     std::vector<ILayoutTarget*> m_targets;
-    std::vector<std::unique_ptr<OverlayLayoutAdapter>> m_adapters;
+    std::vector<std::unique_ptr<adapters::OverlayLayoutAdapter>> m_adapters;
 };
 
 }  // namespace ui

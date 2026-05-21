@@ -3,6 +3,7 @@
 #include <QVTKOpenGLNativeWidget.h>
 #include <vtkGenericOpenGLRenderWindow.h>
 
+#include <QApplication>
 #include <QDockWidget>
 #include <QFrame>
 #include <QHBoxLayout>
@@ -15,17 +16,18 @@
 
 #include "adapters/ColorAdapter.hpp"
 #include "adapters/DicomMetaDataAdapter.hpp"
+#include "adapters/OverlayLayoutAdapter.hpp"
 #include "controllers/DicomController.hpp"
 #include "controllers/MultiWindowController.hpp"
 #include "overlays/CornerAnnotationOverlay.hpp"
 #include "overlays/FPSOverlay.hpp"
 #include "overlays/OrientationMarkerOverlay.hpp"
+#include "ui/AboutDialog.hpp"
 #include "ui/ControllerPanel.hpp"
 #include "ui/ControllerPanelCornerAnnotationItem.hpp"
 #include "ui/ControllerPanelSphereItem.hpp"
 #include "ui/DicomMetaDataPanel.hpp"
 #include "ui/MultiWindowView.hpp"
-#include "ui/OverlayLayoutAdapter.hpp"
 #include "ui/ViewportLayoutManager.hpp"
 #include "ui/ViewportLayoutSelector.hpp"
 #include "ui/ViewportLayoutTypes.hpp"
@@ -37,7 +39,7 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
       m_dicomController(new controllers::DicomController(this)),
       m_layoutManager(std::make_unique<ViewportLayoutManager>(this)) {
-    setWindowTitle("XQVtkViewport — Widgets Demo");
+    setWindowTitle(tr("%1 — Widgets Demo").arg(qApp->applicationName()));
     resize(1400, 860);
     _BuildUi();
     _ConnectSignals();
@@ -102,6 +104,14 @@ void MainWindow::_BuildUi() {
     for (auto* ov : m_multiWindowView->GetOverlays<overlays::CornerAnnotationOverlay>())
         caItem->AddOverlay(ov);
 
+    auto* helpMenu = menuBar()->addMenu(tr("Help"));
+    auto* aboutAction = new QAction(tr("About %1…").arg(qApp->applicationName()), this);
+    connect(aboutAction, &QAction::triggered, this, [this]() {
+        AboutDialog dlg(this);
+        dlg.exec();
+    });
+    helpMenu->addAction(aboutAction);
+
     statusBar()->showMessage("Ready to load DICOM series.");
 }
 
@@ -124,7 +134,7 @@ void MainWindow::_BuildLayoutPanel() {
 
     // Build and register overlay adapters for ViewportView (shared-viewport mode).
     {
-        auto adapter = std::make_unique<OverlayLayoutAdapter>(/*sharedViewport=*/true);
+        auto adapter = std::make_unique<adapters::OverlayLayoutAdapter>(true);
         for (auto* ov : m_viewportView->GetOverlays<overlays::OrientationMarkerOverlay>())
             adapter->AddOrientationMarkerOverlay(ov);
         for (auto* ov : m_viewportView->GetOverlays<overlays::CornerAnnotationOverlay>())
@@ -136,7 +146,7 @@ void MainWindow::_BuildLayoutPanel() {
 
     // Build and register overlay adapters for MultiWindowView (per-widget mode).
     {
-        auto adapter = std::make_unique<OverlayLayoutAdapter>(/*sharedViewport=*/false);
+        auto adapter = std::make_unique<adapters::OverlayLayoutAdapter>(false);
         for (auto* ov : m_multiWindowView->GetOverlays<overlays::OrientationMarkerOverlay>())
             adapter->AddOrientationMarkerOverlay(ov);
         for (auto* ov : m_multiWindowView->GetOverlays<overlays::CornerAnnotationOverlay>())

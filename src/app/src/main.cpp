@@ -1,20 +1,18 @@
 #include <QVTKOpenGLNativeWidget.h>
 
-#include <QApplication>
 #include <QSurfaceFormat>
 
+#include "app/Application.hpp"
 #include "ui/MainWindow.hpp"
 
 int main(int argc, char* argv[]) {
     // QSurfaceFormat::setDefaultFormat(QVTKOpenGLNativeWidget::defaultFormat());
 
-    QApplication app(argc, argv);
-    app.setApplicationName("XQVtkViewport_Widgets");
-    app.setOrganizationName("xaprier");
+    app::Application application(argc, argv);
 
     ui::MainWindow window;
     window.show();
-    QApplication::processEvents();
+    app::Application::processEvents();
 
-    return app.exec();
+    return app::Application::exec();
 }

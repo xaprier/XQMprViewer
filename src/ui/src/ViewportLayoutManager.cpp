@@ -17,7 +17,7 @@ void ViewportLayoutManager::RegisterTarget(ILayoutTarget* target) {
     target->ApplyLayout(m_current);
 }
 
-void ViewportLayoutManager::RegisterOverlayAdapter(std::unique_ptr<OverlayLayoutAdapter> adapter) {
+void ViewportLayoutManager::RegisterOverlayAdapter(std::unique_ptr<adapters::OverlayLayoutAdapter> adapter) {
     if (!adapter)
         return;
     adapter->Sync(m_current);

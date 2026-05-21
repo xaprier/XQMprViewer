@@ -1,10 +1,10 @@
-#include "ui/OverlayLayoutAdapter.hpp"
+#include "adapters/OverlayLayoutAdapter.hpp"
 
 #include "overlays/CornerAnnotationOverlay.hpp"
 #include "overlays/FPSOverlay.hpp"
 #include "overlays/OrientationMarkerOverlay.hpp"
 
-namespace ui {
+namespace adapters {
 
 OverlayLayoutAdapter::OverlayLayoutAdapter(bool sharedViewport)
     : m_sharedViewport(sharedViewport) {
@@ -26,7 +26,7 @@ void OverlayLayoutAdapter::AddFPSOverlay(overlays::FPSOverlay* ov) {
         m_fpsOverlays.push_back(ov);
 }
 
-void OverlayLayoutAdapter::Sync(const ViewportLayoutDefinition& def) {
+void OverlayLayoutAdapter::Sync(const ui::ViewportLayoutDefinition& def) {
     // Rebuild plane→pane map and cache pane data.
     m_currentPane.fill(nullptr);
     for (const auto& pane : def.panes) {
@@ -89,8 +89,7 @@ void OverlayLayoutAdapter::SetAllCornerAnnotationsUserEnabled(bool enabled) {
 
 // VTK viewport uses bottom-left origin; Qt uses top-left.
 // Convert: qtYMin = 1 - vtkYMax,  qtYMax = 1 - vtkYMin
-static void ApplyRect(overlays::OrientationMarkerOverlay* ov,
-                      bool sharedViewport, const ViewportPaneConfig* pane) {
+static void ApplyRect(overlays::OrientationMarkerOverlay* ov, bool sharedViewport, const ui::ViewportPaneConfig* pane) {
     if (sharedViewport && pane) {
         const auto& vp = pane->viewport;
         ov->SetViewportRect(vp.xMin, 1.0 - vp.yMax, vp.xMax, 1.0 - vp.yMin);
@@ -100,7 +99,7 @@ static void ApplyRect(overlays::OrientationMarkerOverlay* ov,
 }
 
 static void ApplyRect(overlays::CornerAnnotationOverlay* ov,
-                      bool sharedViewport, const ViewportPaneConfig* pane) {
+                      bool sharedViewport, const ui::ViewportPaneConfig* pane) {
     if (sharedViewport && pane) {
         const auto& vp = pane->viewport;
         ov->SetViewportRect(vp.xMin, 1.0 - vp.yMax, vp.xMax, 1.0 - vp.yMin);
@@ -111,7 +110,7 @@ static void ApplyRect(overlays::CornerAnnotationOverlay* ov,
 
 void OverlayLayoutAdapter::_ApplyVisibility(overlays::OrientationMarkerOverlay* ov,
                                             bool userEnabled, bool layoutVisible,
-                                            const ViewportPaneConfig* pane) {
+                                            const ui::ViewportPaneConfig* pane) {
     if (!ov)
         return;
     const bool show = userEnabled && layoutVisible;
@@ -124,7 +123,7 @@ void OverlayLayoutAdapter::_ApplyVisibility(overlays::OrientationMarkerOverlay* 
 
 void OverlayLayoutAdapter::_ApplyVisibility(overlays::CornerAnnotationOverlay* ov,
                                             bool userEnabled, bool layoutVisible,
-                                            const ViewportPaneConfig* pane) {
+                                            const ui::ViewportPaneConfig* pane) {
     if (!ov)
         return;
     const bool show = userEnabled && layoutVisible;
@@ -133,4 +132,4 @@ void OverlayLayoutAdapter::_ApplyVisibility(overlays::CornerAnnotationOverlay* o
         ApplyRect(ov, m_sharedViewport, pane);
 }
 
-}  // namespace ui
+}  // namespace adapters

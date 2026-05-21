@@ -1,5 +1,14 @@
 cmake_minimum_required(VERSION 3.20)
-project(XQVtkViewport VERSION 1.0.0 LANGUAGES C CXX)
+project(
+    XQMprViewer
+    VERSION 1.0.0
+    LANGUAGES C CXX
+    DESCRIPTION "An open-source MPR DICOM viewer built with modern C++ architecture, Qt6, and VTK rendering."
+    HOMEPAGE_URL "https://github.com/xaprier/XQMprViewer"
+)
+
+set(PROJECT_ORGANIZATION "xaprier")
+set(PROJECT_DOCUMENTATION "https://xaprier.dev/XQMprViewer")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
