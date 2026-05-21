@@ -12,6 +12,7 @@
 #include "overlays/CornerAnnotationOverlay.hpp"
 #include "overlays/FPSOverlay.hpp"
 #include "overlays/OrientationMarkerOverlay.hpp"
+#include "ui/ViewportLayoutTypes.hpp"
 
 namespace ui {
 
@@ -37,24 +38,26 @@ void ViewportView::_setupUI() {
     m_vtkWidgets = {widget};
     m_fpsOverlays = {new overlays::FPSOverlay(widget)};
 
-    // Three overlays share the single widget; each is clipped to its horizontal viewport third.
-    constexpr double kFractions[3][2] = {{0.0, 1.0 / 3.0}, {1.0 / 3.0, 2.0 / 3.0}, {2.0 / 3.0, 1.0}};
+    // Initial rects: HorizontalSplit (equal thirds, full height in Qt coords y=0 top)
+    constexpr double kRects[3][4] = {
+        {0.0,        0.0, 1.0 / 3.0, 1.0},
+        {1.0 / 3.0,  0.0, 2.0 / 3.0, 1.0},
+        {2.0 / 3.0,  0.0, 1.0,        1.0},
+    };
+
     m_orientationMarkerOverlays.resize(3);
     for (int i = 0; i < 3; ++i) {
         auto* ov = new overlays::OrientationMarkerOverlay(
             widget, overlays::OrientationMarkerOverlay::kSliceOrientations[i]);
-        ov->SetViewportFraction(kFractions[i][0], kFractions[i][1]);
+        ov->SetViewportRect(kRects[i][0], kRects[i][1], kRects[i][2], kRects[i][3]);
         m_orientationMarkerOverlays[i] = ov;
     }
 
-    // Three corner annotation overlays — each clipped to its viewport third.
-    // Viewers are NOT yet available (ViewportController creates SliceController lazily
-    // on first image load). Bind viewers when ViewersReady fires.
     static const QString kViewNames[3] = {"Axial", "Coronal", "Sagittal"};
     m_cornerAnnotationOverlays.resize(3);
     for (int i = 0; i < 3; ++i) {
         auto* ov = new overlays::CornerAnnotationOverlay(widget, kViewNames[i]);
-        ov->SetViewportFraction(kFractions[i][0], kFractions[i][1]);
+        ov->SetViewportRect(kRects[i][0], kRects[i][1], kRects[i][2], kRects[i][3]);
         m_cornerAnnotationOverlays[i] = ov;
     }
 
@@ -62,16 +65,42 @@ void ViewportView::_setupUI() {
     connect(m_viewportController.get(), &controllers::ViewportController::StatusChanged,
             this, &ViewportView::StatusChanged);
 
-    // Bind RIV viewers to overlays once the pipeline is first set up.
     connect(m_viewportController.get(), &controllers::ViewportController::ViewersReady,
             this, [this]() {
+                // Bind RIV viewers to corner annotation overlays.
                 const auto& viewers =
                     m_viewportController->GetSliceController()->GetViewers();
                 for (int i = 0; i < static_cast<int>(m_cornerAnnotationOverlays.size()); ++i) {
                     if (i < static_cast<int>(viewers.size()))
                         m_cornerAnnotationOverlays[i]->SetViewer(viewers[i].Get());
                 }
+
+                // Apply any layout that was requested before the pipeline was ready.
+                if (m_pendingLayout) {
+                    m_viewportController->ApplyLayout(_PanesToDesc(m_pendingLayout->panes));
+                    m_pendingLayout = nullptr;
+                }
             });
+}
+
+void ViewportView::ApplyLayout(const ViewportLayoutDefinition& def) {
+    if (!m_viewportController->IsInitialized() ||
+        !m_viewportController->GetSliceController()) {
+        // Pipeline not yet ready — store and apply on ViewersReady.
+        m_pendingLayoutStorage = def;
+        m_pendingLayout = &m_pendingLayoutStorage;
+        return;
+    }
+    m_viewportController->ApplyLayout(_PanesToDesc(def.panes));
+}
+
+std::vector<controllers::ViewportPaneDesc>
+ViewportView::_PanesToDesc(const std::vector<ViewportPaneConfig>& panes) {
+    std::vector<controllers::ViewportPaneDesc> out;
+    out.reserve(panes.size());
+    for (const auto& p : panes)
+        out.push_back({p.viewport, p.planeIndex});
+    return out;
 }
 
 }  // namespace ui

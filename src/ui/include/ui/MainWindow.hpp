@@ -1,9 +1,8 @@
 #ifndef XQVtkViewport_MAINWINDOW_HPP
 #define XQVtkViewport_MAINWINDOW_HPP
 
-#include <vtkSmartPointer.h>
-
 #include <QMainWindow>
+#include <memory>
 
 class QTabWidget;
 
@@ -26,12 +25,16 @@ class ControllerPanel;
 class DicomMetaDataPanel;
 class MultiWindowView;
 class ViewportView;
+class ViewportLayoutManager;
+class ViewportLayoutSelector;
 
 /**
  * @brief Top-level Qt Widgets main window.
  *
  * Hosts a QTabWidget with a Viewport Mode tab and a Multi-Window Mode tab,
- * plus a shared ControllerPanel for DICOM loading and sphere controls.
+ * plus a shared ControllerPanel for DICOM loading and sphere controls,
+ * and a ViewportLayoutSelector toolbar below the tab widget that drives
+ * layout changes across both views via ViewportLayoutManager.
  */
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -44,16 +47,11 @@ class MainWindow : public QMainWindow {
     void _BuildUi();
     void _BuildViewportTab();
     void _BuildMultiWindowTab();
+    void _BuildLayoutPanel();
     void _ConnectSignals();
+    void _ConnectLayoutSignals();
     void _Notification(const QString& message);
 
-    /**
-     * @brief Apply @p fn to every overlay of type @p OverlayT across both views.
-     *
-     * IView::GetOverlays<T>() dispatches to the correct vector based on T.
-     * Adding a new overlay type only requires adding a GetOverlays<T>()
-     * specialisation to IView — no changes needed here.
-     */
     template <typename OverlayT, typename Fn>
     void _ForEachOverlay(Fn&& fn);
 
@@ -64,6 +62,8 @@ class MainWindow : public QMainWindow {
     ViewportView* m_viewportView{nullptr};
     ControllerPanel* m_controllerPanel{nullptr};
     DicomMetaDataPanel* m_metaDataPanel{nullptr};
+    ViewportLayoutSelector* m_layoutSelector{nullptr};
+    std::unique_ptr<ViewportLayoutManager> m_layoutManager;
 };
 
 }  // namespace ui

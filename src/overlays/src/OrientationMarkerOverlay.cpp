@@ -11,17 +11,17 @@ namespace overlays {
 
 // Label table indexed by [longLabels][orientation][edge: L, R, T, B].
 static constexpr const char* kLabels[2][3][4] = {
-    // short
+    // short  [left, right, top, bottom]
     {
-        {"L", "R", "A", "P"},  // Axial
-        {"L", "R", "S", "I"},  // Coronal
-        {"A", "P", "S", "I"},  // Sagittal
+        {"L", "R", "A", "P"},  // Axial    (XY): left=L, right=R, top=A, bot=P
+        {"L", "R", "S", "I"},  // Coronal  (XZ): left=L, right=R, top=S, bot=I
+        {"P", "A", "S", "I"},  // Sagittal (YZ): left=P, right=A, top=S, bot=I
     },
     // long
     {
-        {"Left", "Right", "Anterior",  "Posterior"},  // Axial
-        {"Left", "Right", "Superior",  "Inferior"},   // Coronal
-        {"Anterior", "Posterior", "Superior", "Inferior"},  // Sagittal
+        {"Left", "Right", "Anterior",  "Posterior"},           // Axial
+        {"Left", "Right", "Superior",  "Inferior"},            // Coronal
+        {"Posterior", "Anterior", "Superior", "Inferior"},     // Sagittal
     },
 };
 
@@ -92,11 +92,14 @@ void OrientationMarkerOverlay::SetSliceOrientation(SliceOrientation orientation)
     update();
 }
 
-void OrientationMarkerOverlay::SetViewportFraction(double xMin, double xMax) {
-    if (m_vpXMin == xMin && m_vpXMax == xMax)
+void OrientationMarkerOverlay::SetViewportRect(double xMin, double yMin,
+                                               double xMax, double yMax) {
+    if (m_vpXMin == xMin && m_vpYMin == yMin && m_vpXMax == xMax && m_vpYMax == yMax)
         return;
     m_vpXMin = xMin;
+    m_vpYMin = yMin;
     m_vpXMax = xMax;
+    m_vpYMax = yMax;
     update();
 }
 
@@ -117,10 +120,13 @@ void OrientationMarkerOverlay::paintEvent(QPaintEvent* /*event*/) {
     const int totalW = width();
     const int totalH = height();
     const int vpLeft  = static_cast<int>(m_vpXMin * totalW);
+    const int vpTop   = static_cast<int>(m_vpYMin * totalH);
     const int vpRight = static_cast<int>(m_vpXMax * totalW);
+    const int vpBot   = static_cast<int>(m_vpYMax * totalH);
     const int vpW     = vpRight - vpLeft;
+    const int vpH     = vpBot   - vpTop;
 
-    if (vpW <= 0 || totalH <= 0)
+    if (vpW <= 0 || vpH <= 0)
         return;
 
     if (m_fontDirty) {
@@ -135,18 +141,19 @@ void OrientationMarkerOverlay::paintEvent(QPaintEvent* /*event*/) {
 
     QPainter p(this);
     p.setRenderHint(QPainter::TextAntialiasing);
-    p.setClipRect(vpLeft, 0, vpW, totalH);
+    p.setClipRect(vpLeft, vpTop, vpW, vpH);
     p.setFont(m_cachedFont);
 
-    _DrawLabel(p, m_cachedMetrics, labels.left,   Qt::AlignLeft,   vpLeft, vpRight, vpW, totalH);
-    _DrawLabel(p, m_cachedMetrics, labels.right,  Qt::AlignRight,  vpLeft, vpRight, vpW, totalH);
-    _DrawLabel(p, m_cachedMetrics, labels.top,    Qt::AlignTop,    vpLeft, vpRight, vpW, totalH);
-    _DrawLabel(p, m_cachedMetrics, labels.bottom, Qt::AlignBottom, vpLeft, vpRight, vpW, totalH);
+    _DrawLabel(p, m_cachedMetrics, labels.left,   Qt::AlignLeft,   vpLeft, vpTop, vpRight, vpBot, vpW, vpH);
+    _DrawLabel(p, m_cachedMetrics, labels.right,  Qt::AlignRight,  vpLeft, vpTop, vpRight, vpBot, vpW, vpH);
+    _DrawLabel(p, m_cachedMetrics, labels.top,    Qt::AlignTop,    vpLeft, vpTop, vpRight, vpBot, vpW, vpH);
+    _DrawLabel(p, m_cachedMetrics, labels.bottom, Qt::AlignBottom, vpLeft, vpTop, vpRight, vpBot, vpW, vpH);
 }
 
 void OrientationMarkerOverlay::_DrawLabel(QPainter& p, const QFontMetrics& fm,
                                           const QString& text, Qt::Alignment align,
-                                          int vpLeft, int vpRight, int vpW, int totalH) const {
+                                          int vpLeft, int vpTop, int vpRight, int vpBot,
+                                          int vpW, int vpH) const {
     if (text.isEmpty())
         return;
 
@@ -156,16 +163,16 @@ void OrientationMarkerOverlay::_DrawLabel(QPainter& p, const QFontMetrics& fm,
     int x = 0, y = 0;
     if (align & Qt::AlignLeft) {
         x = vpLeft + m_margin;
-        y = (totalH - textH) / 2;
+        y = vpTop + (vpH - textH) / 2;
     } else if (align & Qt::AlignRight) {
         x = vpRight - textW - m_margin;
-        y = (totalH - textH) / 2;
+        y = vpTop + (vpH - textH) / 2;
     } else if (align & Qt::AlignTop) {
         x = vpLeft + (vpW - textW) / 2;
-        y = m_margin;
+        y = vpTop + m_margin;
     } else if (align & Qt::AlignBottom) {
         x = vpLeft + (vpW - textW) / 2;
-        y = totalH - textH - m_margin;
+        y = vpBot - textH - m_margin;
     } else {
         return;
     }

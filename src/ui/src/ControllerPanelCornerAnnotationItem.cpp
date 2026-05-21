@@ -42,32 +42,26 @@ void ControllerPanelCornerAnnotationItem::ClearOverlays() {
 void ControllerPanelCornerAnnotationItem::_setupUi() {
     auto* group = new QGroupBox(tr("Corner Annotations"), this);
     auto* form = new QFormLayout(group);
-    QGridLayout* grid = new QGridLayout();  // for grouping check boxes in 2 columns 2 rows
-
     form->setSpacing(4);
 
-    m_enableCheck = new QCheckBox(tr("Enable"), group);
+    m_enableCheck = new QCheckBox(this);
     m_enableCheck->setChecked(true);
 
     m_positionCombo = new QComboBox(group);
     m_positionCombo->addItems(overlays::GetOverlayPositionNames());
     m_positionCombo->setCurrentIndex(static_cast<int>(overlays::OverlayPosition::BottomRight));
 
-    m_showSliceInfoCheck = new QCheckBox(tr("Slice info"), group);
+    m_showSliceInfoCheck = new QCheckBox(this);
     m_showSliceInfoCheck->setChecked(true);
 
-    m_showWindowLevelCheck = new QCheckBox(tr("Window / Level"), group);
+    m_showWindowLevelCheck = new QCheckBox(this);
     m_showWindowLevelCheck->setChecked(true);
 
-    m_showSpacingCheck = new QCheckBox(tr("Spacing"), group);
+    m_showSpacingCheck = new QCheckBox(this);
     m_showSpacingCheck->setChecked(true);
 
-    m_showViewNameCheck = new QCheckBox(tr("View name"), group);
+    m_showViewNameCheck = new QCheckBox(this);
     m_showViewNameCheck->setChecked(true);
-    grid->addWidget(m_showSliceInfoCheck, 0, 0);
-    grid->addWidget(m_showWindowLevelCheck, 0, 1);
-    grid->addWidget(m_showSpacingCheck, 1, 0);
-    grid->addWidget(m_showViewNameCheck, 1, 1);
 
     m_fontSizeSpin = new QSpinBox(group);
     m_fontSizeSpin->setRange(6, 48);
@@ -85,12 +79,15 @@ void ControllerPanelCornerAnnotationItem::_setupUi() {
         QString("background-color: %1;").arg(m_textColor.name()));
     m_colorButton->setToolTip(tr("Pick annotation text color"));
 
-    form->addRow(m_enableCheck);
-    form->addRow(tr("Position:"), m_positionCombo);
-    form->addRow(grid);
-    form->addRow(tr("Font size:"), m_fontSizeSpin);
-    form->addRow(tr("Margin:"), m_marginSpin);
-    form->addRow(tr("Text color:"), m_colorButton);
+    form->addRow(tr("Enable:"),         m_enableCheck);
+    form->addRow(tr("Position:"),       m_positionCombo);
+    form->addRow(tr("Slice info:"),     m_showSliceInfoCheck);
+    form->addRow(tr("Window/Level:"),   m_showWindowLevelCheck);
+    form->addRow(tr("Spacing:"),        m_showSpacingCheck);
+    form->addRow(tr("View name:"),      m_showViewNameCheck);
+    form->addRow(tr("Font size:"),      m_fontSizeSpin);
+    form->addRow(tr("Margin:"),         m_marginSpin);
+    form->addRow(tr("Text color:"),     m_colorButton);
 
     auto* outer = new QVBoxLayout(this);
     outer->setContentsMargins(0, 0, 0, 0);

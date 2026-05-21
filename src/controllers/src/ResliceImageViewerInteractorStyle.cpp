@@ -33,6 +33,8 @@ void ResliceImageViewerInteractorStyle::Execute(vtkObject* caller, unsigned long
         default:
             break;
     }
+
+    _Render();
 }
 
 void ResliceImageViewerInteractorStyle::SetViewers(const std::vector<vtkSmartPointer<vtkResliceImageViewer>>& viewers) {
@@ -59,8 +61,6 @@ void ResliceImageViewerInteractorStyle::_SyncWindowLevel(vtkResliceImageViewer* 
             viewer->SetColorLevel(source->GetColorLevel());
         }
     }
-
-    _Render();
 }
 
 void ResliceImageViewerInteractorStyle::_Render() {

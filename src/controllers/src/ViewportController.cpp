@@ -208,22 +208,57 @@ void ViewportController::_SetupPipeline(vtkImageData* imageData) {
 }
 
 void ViewportController::_ApplyViewportLayout() {
+    if (!m_pendingLayout.empty()) {
+        _ApplyPanes(m_pendingLayout);
+        m_pendingLayout.clear();
+    } else {
+        // Default: horizontal split
+        const auto configs = qvv::ViewportLayout::HorizontalSplit(
+            3, {0.1, 0.1, 0.1}, {"Axial", "Coronal", "Sagittal"});
+        std::vector<ViewportPaneDesc> panes;
+        for (int i = 0; i < 3; ++i)
+            panes.push_back({configs[i], i});
+        _ApplyPanes(panes);
+    }
+}
+
+void ViewportController::ApplyLayout(const std::vector<ViewportPaneDesc>& panes) {
+    if (!m_sliceController) {
+        // Pipeline not ready yet — store for when _ApplyViewportLayout() is called
+        m_pendingLayout = panes;
+        return;
+    }
+    _ApplyPanes(panes);
+}
+
+void ViewportController::_ApplyPanes(const std::vector<ViewportPaneDesc>& panes) {
     if (!m_sliceController)
         return;
-
-    const auto configs = qvv::ViewportLayout::HorizontalSplit(
-        3, {0.1, 0.1, 0.1}, {"Axial", "Coronal", "Sagittal"});
 
     std::vector<vtkSmartPointer<vtkRenderer>> renderers;
     m_sliceController->GetRenderers(renderers);
 
-    for (int i = 0; i < 3 && i < static_cast<int>(renderers.size()); ++i) {
-        if (!renderers[i])
-            continue;
-        const auto& cfg = configs[i];
-        renderers[i]->SetViewport(cfg.xMin, cfg.yMin, cfg.xMax, cfg.yMax);
-        renderers[i]->SetBackground(cfg.background[0], cfg.background[1], cfg.background[2]);
+    for (auto& r : renderers) {
+        if (r)
+            r->DrawOff();
     }
+
+    for (const auto& pane : panes) {
+        const int idx = pane.planeIndex;
+        if (idx < 0 || idx >= static_cast<int>(renderers.size()))
+            continue;
+        auto& r = renderers[idx];
+        if (!r)
+            continue;
+        const auto& cfg = pane.viewport;
+        r->SetViewport(cfg.xMin, cfg.yMin, cfg.xMax, cfg.yMax);
+        r->SetBackground(cfg.background[0], cfg.background[1], cfg.background[2]);
+        r->DrawOn();
+    }
+
+    // FitToView recomputes parallelScale for each pane's new viewport geometry.
+    m_sliceController->FitToView();
+    _Render();
 }
 
 }  // namespace controllers

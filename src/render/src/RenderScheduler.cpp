@@ -95,7 +95,6 @@ void RenderScheduler::Flush() {
     for (const auto& e : m_entries) {
         if (!m_dirty.count(e.window))
             continue;
-
         e.target->ExecuteRender();
         m_dirty.erase(e.window);  // prevent a second target hitting the same window
     }

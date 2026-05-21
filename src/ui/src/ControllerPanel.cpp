@@ -1,7 +1,6 @@
 #include "ui/ControllerPanel.hpp"
 
-#include <QFrame>
-#include <QLabel>
+#include <QTabWidget>
 #include <QVBoxLayout>
 
 #include "ui/ControllerPanelCornerAnnotationItem.hpp"
@@ -45,8 +44,8 @@ ControllerPanelCornerAnnotationItem* ControllerPanel::GetCornerAnnotationItem() 
 
 void ControllerPanel::_setupUi() {
     auto* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(4, 4, 4, 4);
-    layout->setSpacing(4);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
 
     m_dicomItem = new ControllerPanelDicomItem(this);
     m_sphereItem = new ControllerPanelSphereItem(this);
@@ -54,23 +53,17 @@ void ControllerPanel::_setupUi() {
     m_orientationMarkerItem = new ControllerPanelOrientationMarkerItem(this);
     m_cornerAnnotationItem = new ControllerPanelCornerAnnotationItem(this);
 
-    auto makeSep = [this]() -> QFrame* {
-        auto* sep = new QFrame(this);
-        sep->setFrameShape(QFrame::HLine);
-        sep->setFrameShadow(QFrame::Sunken);
-        return sep;
-    };
+    auto* tabs = new QTabWidget(this);
+    tabs->setTabPosition(QTabWidget::West);
+    tabs->setDocumentMode(true);
 
-    layout->addWidget(m_dicomItem);
-    layout->addWidget(makeSep());
-    layout->addWidget(m_sphereItem);
-    layout->addWidget(makeSep());
-    layout->addWidget(m_fpsOverlayItem);
-    layout->addWidget(makeSep());
-    layout->addWidget(m_orientationMarkerItem);
-    layout->addWidget(makeSep());
-    layout->addWidget(m_cornerAnnotationItem);
-    layout->addStretch(1);
+    tabs->addTab(m_dicomItem,              tr("DICOM"));
+    tabs->addTab(m_sphereItem,             tr("Sphere Controller"));
+    tabs->addTab(m_fpsOverlayItem,         tr("FPS Overlay"));
+    tabs->addTab(m_orientationMarkerItem,  tr("Orientation Marker"));
+    tabs->addTab(m_cornerAnnotationItem,   tr("Corner Annotation"));
+
+    layout->addWidget(tabs);
 
     connect(m_dicomItem, &ControllerPanelDicomItem::DirectorySelected,
             this, &ControllerPanel::DirectorySelected);
