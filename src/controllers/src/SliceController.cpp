@@ -161,7 +161,6 @@ void SliceController::SetupPipeline() {
             const int sliceIdx = static_cast<int>((worldPos[ax] - origin[ax]) / spacing[ax] + 0.5);
             const int clamped = std::max(m_rivs[i]->GetSliceMin(), std::min(m_rivs[i]->GetSliceMax(), sliceIdx));
 
-            qDebug() << "Setting slice for view" << i << "(axis" << ax << ") to middle slice index:" << clamped;
             m_rivs[i]->SetSlice(clamped);
         }
 
