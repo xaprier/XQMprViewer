@@ -1,10 +1,31 @@
 # XQMprViewer
 
+<p align="center">
+  <a href="https://github.com/xaprier/XQMprViewer/blob/main/LICENSE" target="blank">
+    <img src="https://img.shields.io/github/license/xaprier/XQMprViewer" alt="license" />
+  </a>
+  <a href="https://github.com/xaprier/XQMprViewer/actions" target="blank">
+    <img src="https://img.shields.io/github/actions/workflow/status/xaprier/XQMprViewer/release.yml?branch=main" alt="build status" />
+  </a>
+  <a href="https://xaprier.github.io/XQMprViewer/" target="blank">
+    <img src="https://img.shields.io/badge/docs-doxygen-blue.svg" alt="documentation" />
+  </a>
+  <a href="https://github.com/xaprier/XQMprViewer/releases" target="blank">
+    <img src="https://img.shields.io/github/v/release/xaprier/XQMprViewer" alt="latest release" />
+  </a>
+</p>
+
 A Qt Widgets + VTK based MPR (Multi-Planar Reconstruction) viewer demonstrating
 how to build a production-quality medical imaging application with a clean,
 layered architecture.
 
 The project is split into two independently buildable parts: a reusable viewport management **library** (`lib/XQVtkViewport`) and a full-featured **demo application** (`src/`) that consumes it.
+
+<p align="center">
+    <a href="https://xaprier.github.io/XQMprViewer/">
+        View API Documentation
+    </a>
+</p>
 
 ---
 
@@ -238,7 +259,7 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j$(nproc)
 ```
 
-The binary is placed at `build/src/XQMprViewer_Widgets`.
+The binary is placed at `build/src/XQMprViewer`.
 
 If VTK or Qt are installed to a non-standard prefix, pass it via `CMAKE_PREFIX_PATH`:
 
@@ -256,16 +277,15 @@ build.
 
 ## Documentation
 
-API documentation is generated with [Doxygen](https://www.doxygen.nl).
-A `Doxyfile` is provided at the project root.
+Full API documentation is available at [xaprier.github.io/XQMprViewer](https://xaprier.github.io/XQMprViewer).
 
-```bash
+Generate documentation locally:
+
+```
 doxygen Doxyfile
+xdg-open docs/html/index.html
 ```
 
-Output is written to `docs/doxygen/html/`. Open `docs/doxygen/html/index.html`
-in a browser to browse the generated reference.
+## License
 
-Class collaboration and call graphs require the `dot` tool from
-[Graphviz](https://graphviz.org). If Graphviz is not installed, Doxygen falls
-back to plain HTML diagrams automatically.
+This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) for details.

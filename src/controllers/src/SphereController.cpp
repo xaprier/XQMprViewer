@@ -12,7 +12,6 @@
 #include <vtkRenderer.h>
 #include <vtkSphereSource.h>
 
-#include <QDebug>
 #include <algorithm>
 
 #include "render/RenderScheduler.hpp"
@@ -107,7 +106,6 @@ void SphereController::Cleanup() {
 // ── State setters ─────────────────────────────────────────────────────────────
 
 void SphereController::SetPosition(const Vec3& pos) {
-    qDebug() << "SphereController::SetPosition: Setting sphere position to:" << pos[0] << pos[1] << pos[2];
     m_sphereSource->SetCenter(pos[0], pos[1], pos[2]);
     m_sphereSource->Update();
     for (auto& entry : m_rendererEntries) {
@@ -117,7 +115,6 @@ void SphereController::SetPosition(const Vec3& pos) {
 }
 
 void SphereController::SetRadius(double radius) {
-    qDebug() << "SphereController::SetRadius: Setting sphere radius to:" << radius;
     m_sphereSource->SetRadius(radius);
     m_sphereSource->Update();
     for (auto& entry : m_rendererEntries) {
@@ -126,7 +123,6 @@ void SphereController::SetRadius(double radius) {
 }
 
 void SphereController::SetColor(const Vec3& rgb) {
-    qDebug() << "SphereController::SetColor: Setting sphere color to:" << rgb[0] << rgb[1] << rgb[2];
     for (auto& entry : m_rendererEntries) {
         entry.actor->GetProperty()->SetColor(rgb[0], rgb[1], rgb[2]);
         entry.actor->Modified();

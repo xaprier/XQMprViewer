@@ -5,6 +5,7 @@
 #include <QFrame>
 #include <QGridLayout>
 #include <QLabel>
+#include <QPixmap>
 #include <QVBoxLayout>
 
 #include "app/Application.hpp"
@@ -24,6 +25,16 @@ void AboutDialog::_BuildUi() {
     auto* root = new QVBoxLayout(this);
     root->setContentsMargins(28, 24, 28, 20);
     root->setSpacing(0);
+
+    // ── Logo ────────────────────────────────────────────────────────────────
+    auto* logoLabel = new QLabel(this);
+    QPixmap logoPixmap(QStringLiteral(":/assets/XQMprViewer.png"));
+    if (!logoPixmap.isNull()) {
+        logoLabel->setPixmap(logoPixmap.scaled(96, 96, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        logoLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        root->addWidget(logoLabel, 0, Qt::AlignHCenter);
+        root->addSpacing(12);
+    }
 
     // ── App name ─────────────────────────────────────────────────────────────
     auto* nameLabel = new QLabel(app::qAppInstance()->applicationDisplayName(), this);

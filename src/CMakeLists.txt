@@ -24,12 +24,21 @@ file (GLOB_RECURSE HPP_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/ui/include/ui/*.hpp"
 )
 
-add_executable(XQVtkViewport_Widgets
-    ${CPP_FILES}
-    ${HPP_FILES}
+file (GLOB_RECURSE QRC_FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/ui/resources/*.qrc"
 )
 
-target_include_directories(XQVtkViewport_Widgets
+add_executable(XQMprViewer
+    ${CPP_FILES}
+    ${HPP_FILES}
+    ${QRC_FILES}
+)
+
+if(WIN32)
+    target_sources(XQMprViewer PRIVATE "${CMAKE_SOURCE_DIR}/assets/icon.rc")
+endif()
+
+target_include_directories(XQMprViewer
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/adapters/include
         ${CMAKE_CURRENT_SOURCE_DIR}/app/include
@@ -38,9 +47,10 @@ target_include_directories(XQVtkViewport_Widgets
         ${CMAKE_CURRENT_SOURCE_DIR}/overlays/include
         ${CMAKE_CURRENT_SOURCE_DIR}/render/include
         ${CMAKE_CURRENT_SOURCE_DIR}/ui/include
+        ${VTK_DICOM_INCLUDE_DIRS}
 )
 
-target_link_libraries(XQVtkViewport_Widgets
+target_link_libraries(XQMprViewer
     PRIVATE
         XQVtkViewport
         Qt6::Core
@@ -55,10 +65,10 @@ target_link_libraries(XQVtkViewport_Widgets
         ${VTK_LIBRARIES}
 )
 
-target_compile_features(XQVtkViewport_Widgets PRIVATE cxx_std_17)
+target_compile_features(XQMprViewer PRIVATE cxx_std_17)
 
 vtk_module_autoinit(
-    TARGETS XQVtkViewport_Widgets
+    TARGETS XQMprViewer
     MODULES
         VTK::GUISupportQt
         VTK::RenderingOpenGL2
@@ -67,3 +77,16 @@ vtk_module_autoinit(
         VTK::RenderingAnnotation
         ${VTK_LIBRARIES}
 )
+
+install(TARGETS XQMprViewer
+    RUNTIME DESTINATION bin
+)
+
+if(UNIX AND NOT APPLE)
+    install(FILES "${CMAKE_SOURCE_DIR}/assets/XQMprViewer.desktop"
+        DESTINATION share/applications
+    )
+    install(FILES "${CMAKE_SOURCE_DIR}/assets/XQMprViewer.png"
+        DESTINATION share/icons/hicolor/1024x1024/apps
+    )
+endif()

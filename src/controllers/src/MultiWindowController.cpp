@@ -7,7 +7,6 @@
 #include <vtkRendererCollection.h>
 #include <vtkResliceImageViewer.h>
 
-#include <QDebug>
 #include <QString>
 #include <array>
 
@@ -48,7 +47,6 @@ void MultiWindowController::_Initialize(const std::vector<QVTKOpenGLNativeWidget
 }
 
 void MultiWindowController::_AddSphere() {
-    qDebug() << "_AddSphere";
     if (!m_initialized) {
         emit StatusChanged(tr("Cannot add sphere. MultiWindowController is not initialized."));
         return;
@@ -105,7 +103,6 @@ void MultiWindowController::_AddSphere() {
 }
 
 void MultiWindowController::_RemoveSphere() {
-    qDebug() << "_RemoveSphere";
     if (!m_initialized) {
         emit StatusChanged(tr("Cannot remove sphere. MultiWindowController is not initialized."));
         return;

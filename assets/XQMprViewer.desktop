@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=XQMprViewer
+Comment=A Qt Widgets + VTK based MPR (Multi-Planar Reconstruction) viewer example
+Exec=XQMprViewer
+Icon=XQMprViewer
+Categories=Utility;
+Keywords=viewer;mpr
