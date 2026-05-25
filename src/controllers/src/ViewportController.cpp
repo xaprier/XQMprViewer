@@ -6,7 +6,6 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkRenderer.h>
 
-#include <QDebug>
 #include <XQVtkViewport/ViewportLayout.hpp>
 
 #include "controllers/SliceController.hpp"
@@ -40,7 +39,6 @@ void ViewportController::_Initialize(const std::vector<QVTKOpenGLNativeWidget*> 
 }
 
 void ViewportController::_AddSphere() {
-    qDebug() << "ViewportController::_AddSphere";
     if (!m_initialized) {
         emit StatusChanged(tr("Cannot add sphere. ViewportController is not initialized."));
         return;
@@ -98,7 +96,6 @@ void ViewportController::_AddSphere() {
 }
 
 void ViewportController::_RemoveSphere() {
-    qDebug() << "ViewportController::_RemoveSphere";
     if (!m_initialized) {
         emit StatusChanged(tr("Cannot remove sphere. ViewportController is not initialized."));
         return;

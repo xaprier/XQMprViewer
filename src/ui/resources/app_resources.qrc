@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/assets">
+        <file alias="XQMprViewer.png">../../../assets/XQMprViewer.png</file>
+    </qresource>
+</RCC>
