@@ -1,6 +1,6 @@
 var classui_1_1ControllerPanel =
 [
-    [ "ControllerPanel", "classui_1_1ControllerPanel.html#aa83a07953f6452e7d2a6ef1532ff9590", null ],
+    [ "ControllerPanel", "classui_1_1ControllerPanel.html#a54f1e2a8f87f7d9f3d6e215c280e3e82", null ],
     [ "~ControllerPanel", "classui_1_1ControllerPanel.html#a125c9dcaf7bbfba05ee301d63975bcbc", null ],
     [ "CornerAnnotationColorChanged", "classui_1_1ControllerPanel.html#a57f41069ca4d898b7a843ff573b53095", null ],
     [ "CornerAnnotationEnableChanged", "classui_1_1ControllerPanel.html#a40918f87124830a97d7a1486a9edc6da", null ],

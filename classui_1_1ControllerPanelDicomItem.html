@@ -114,8 +114,8 @@ Collaboration diagram for ui::ControllerPanelDicomItem:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af8fecb97b4bca39046618df31a5e3bc3" id="r_af8fecb97b4bca39046618df31a5e3bc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1ControllerPanelDicomItem.html#af8fecb97b4bca39046618df31a5e3bc3">ControllerPanelDicomItem</a> (QWidget *parent=nullptr)</td></tr>
-<tr class="separator:af8fecb97b4bca39046618df31a5e3bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404efaf88d8713ee64e3aafbafad8e4a" id="r_a404efaf88d8713ee64e3aafbafad8e4a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1ControllerPanelDicomItem.html#a404efaf88d8713ee64e3aafbafad8e4a">ControllerPanelDicomItem</a> (<a class="el" href="classcontrollers_1_1DicomController.html">controllers::DicomController</a> *dicomController, QWidget *parent=nullptr)</td></tr>
+<tr class="separator:a404efaf88d8713ee64e3aafbafad8e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ef98ec3c2bccf6978bc0e073212776" id="r_ad1ef98ec3c2bccf6978bc0e073212776"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1ControllerPanelDicomItem.html#ad1ef98ec3c2bccf6978bc0e073212776">~ControllerPanelDicomItem</a> () override</td></tr>
 <tr class="separator:ad1ef98ec3c2bccf6978bc0e073212776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bd1d8946a935aecb122c1e16a893feb" id="r_a8bd1d8946a935aecb122c1e16a893feb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classui_1_1ControllerPanelDicomItem.html#a8bd1d8946a935aecb122c1e16a893feb">SetSeries</a> (const QStringList &amp;seriesNames)</td></tr>
@@ -129,10 +129,10 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Control panel item for DICOM directory and series selection. </p>
 <p>Pressing "Select Series" expands an animated series list; clicking an entry selects it and collapses the list automatically. </p>
 
-<p class="definition">Definition at line <a class="el" href="ControllerPanelDicomItem_8hpp_source.html#l00020">20</a> of file <a class="el" href="ControllerPanelDicomItem_8hpp_source.html">ControllerPanelDicomItem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ControllerPanelDicomItem_8hpp_source.html#l00029">29</a> of file <a class="el" href="ControllerPanelDicomItem_8hpp_source.html">ControllerPanelDicomItem.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af8fecb97b4bca39046618df31a5e3bc3" name="af8fecb97b4bca39046618df31a5e3bc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8fecb97b4bca39046618df31a5e3bc3">&#9670;&#160;</a></span>ControllerPanelDicomItem()</h2>
+<a id="a404efaf88d8713ee64e3aafbafad8e4a" name="a404efaf88d8713ee64e3aafbafad8e4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404efaf88d8713ee64e3aafbafad8e4a">&#9670;&#160;</a></span>ControllerPanelDicomItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,9 +143,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">ui::ControllerPanelDicomItem::ControllerPanelDicomItem </td>
           <td>(</td>
-          <td class="paramtype">QWidget *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>nullptr</code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classcontrollers_1_1DicomController.html">controllers::DicomController</a> *&#160;</td>
+          <td class="paramname"><em>dicomController</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -155,7 +165,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ControllerPanelDicomItem_8cpp_source.html#l00018">18</a> of file <a class="el" href="ControllerPanelDicomItem_8cpp_source.html">ControllerPanelDicomItem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ControllerPanelDicomItem_8cpp_source.html#l00022">22</a> of file <a class="el" href="ControllerPanelDicomItem_8cpp_source.html">ControllerPanelDicomItem.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,7 +247,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ControllerPanelDicomItem_8cpp_source.html#l00025">25</a> of file <a class="el" href="ControllerPanelDicomItem_8cpp_source.html">ControllerPanelDicomItem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ControllerPanelDicomItem_8cpp_source.html#l00029">29</a> of file <a class="el" href="ControllerPanelDicomItem_8cpp_source.html">ControllerPanelDicomItem.cpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="ControllerPanel_8cpp_source.html#l00021">ui::ControllerPanel::SetSeries()</a>.</p>
 <div class="dynheader">
