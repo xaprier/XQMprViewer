@@ -15,7 +15,6 @@
 #include <QWidget>
 
 #include "adapters/ColorAdapter.hpp"
-#include "adapters/DicomMetaDataAdapter.hpp"
 #include "adapters/OverlayLayoutAdapter.hpp"
 #include "controllers/DicomController.hpp"
 #include "controllers/MultiWindowController.hpp"
@@ -26,7 +25,6 @@
 #include "ui/ControllerPanel.hpp"
 #include "ui/ControllerPanelCornerAnnotationItem.hpp"
 #include "ui/ControllerPanelSphereItem.hpp"
-#include "ui/DicomMetaDataPanel.hpp"
 #include "ui/MultiWindowView.hpp"
 #include "ui/ViewportLayoutManager.hpp"
 #include "ui/ViewportLayoutSelector.hpp"
@@ -50,7 +48,7 @@ MainWindow::~MainWindow() = default;
 
 void MainWindow::_BuildUi() {
     // ── Left dock: controller panel ──────────────────────────────────────────
-    m_controllerPanel = new ControllerPanel(this);
+    m_controllerPanel = new ControllerPanel(m_dicomController, this);
     auto* leftDock = new QDockWidget(tr("Controller Panel"), this);
     leftDock->setWidget(m_controllerPanel);
     leftDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetMovable);
@@ -77,18 +75,7 @@ void MainWindow::_BuildUi() {
 
     setCentralWidget(centralContainer);
 
-    // ── Right dock: DICOM metadata ───────────────────────────────────────────
-    m_metaDataAdapter = new adapters::DicomMetaDataAdapter(m_dicomController, this);
-    m_metaDataPanel = new DicomMetaDataPanel(m_metaDataAdapter, this);
-    auto* rightDock = new QDockWidget(tr("DICOM Metadata"), this);
-    rightDock->setWidget(m_metaDataPanel);
-    rightDock->setFeatures(QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetMovable);
-    rightDock->setMinimumWidth(260);
-    rightDock->setMaximumWidth(420);
-    addDockWidget(Qt::RightDockWidgetArea, rightDock);
-
     auto* viewMenu = menuBar()->addMenu(tr("View"));
-    viewMenu->addAction(rightDock->toggleViewAction());
     viewMenu->addAction(leftDock->toggleViewAction());
 
     auto* layoutPanelAction = new QAction(tr("Layout Panel"), this);

@@ -11,8 +11,8 @@
 
 namespace ui {
 
-ControllerPanel::ControllerPanel(QWidget* parent)
-    : QWidget(parent) {
+ControllerPanel::ControllerPanel(controllers::DicomController* dicomController, QWidget* parent)
+    : QWidget(parent), m_dicomController(dicomController) {
     _setupUi();
 }
 
@@ -47,7 +47,7 @@ void ControllerPanel::_setupUi() {
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    m_dicomItem = new ControllerPanelDicomItem(this);
+    m_dicomItem = new ControllerPanelDicomItem(m_dicomController, this);
     m_sphereItem = new ControllerPanelSphereItem(this);
     m_fpsOverlayItem = new ControllerPanelFPSOverlayItem(this);
     m_orientationMarkerItem = new ControllerPanelOrientationMarkerItem(this);
@@ -57,11 +57,11 @@ void ControllerPanel::_setupUi() {
     tabs->setTabPosition(QTabWidget::West);
     tabs->setDocumentMode(true);
 
-    tabs->addTab(m_dicomItem,              tr("DICOM"));
-    tabs->addTab(m_sphereItem,             tr("Sphere Controller"));
-    tabs->addTab(m_fpsOverlayItem,         tr("FPS Overlay"));
-    tabs->addTab(m_orientationMarkerItem,  tr("Orientation Marker"));
-    tabs->addTab(m_cornerAnnotationItem,   tr("Corner Annotation"));
+    tabs->addTab(m_dicomItem, tr("DICOM"));
+    tabs->addTab(m_sphereItem, tr("Sphere Controller"));
+    tabs->addTab(m_fpsOverlayItem, tr("FPS Overlay"));
+    tabs->addTab(m_orientationMarkerItem, tr("Orientation Marker"));
+    tabs->addTab(m_cornerAnnotationItem, tr("Corner Annotation"));
 
     layout->addWidget(tabs);
 

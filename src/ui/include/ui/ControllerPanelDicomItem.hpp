@@ -9,7 +9,16 @@ class QPropertyAnimation;
 class QPushButton;
 class QStringListModel;
 
+namespace controllers {
+class DicomController;
+}
+
+namespace adapters {
+class DicomMetaDataAdapter;
+}
+
 namespace ui {
+class DicomMetaDataPanel;
 
 /**
  * @brief Control panel item for DICOM directory and series selection.
@@ -20,7 +29,7 @@ namespace ui {
 class ControllerPanelDicomItem : public QWidget {
     Q_OBJECT
   public:
-    explicit ControllerPanelDicomItem(QWidget* parent = nullptr);
+    explicit ControllerPanelDicomItem(controllers::DicomController* dicomController, QWidget* parent = nullptr);
     ~ControllerPanelDicomItem() override;
 
     void SetSeries(const QStringList& seriesNames);
@@ -42,6 +51,10 @@ class ControllerPanelDicomItem : public QWidget {
     QListWidget* m_seriesList{nullptr};
     QPushButton* m_loadButton{nullptr};
     QLabel* m_selectedLabel{nullptr};
+
+    DicomMetaDataPanel* m_metaDataPanel{nullptr};
+    adapters::DicomMetaDataAdapter* m_metaDataAdapter{nullptr};
+    controllers::DicomController* m_dicomController{nullptr};
 
     QString m_currentDirectory;
     int m_selectedIndex{-1};

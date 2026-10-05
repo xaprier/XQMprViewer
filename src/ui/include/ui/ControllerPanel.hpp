@@ -9,6 +9,10 @@ namespace overlays {
 enum class OverlayPosition;
 }
 
+namespace controllers {
+class DicomController;
+}
+
 namespace ui {
 class ControllerPanelCornerAnnotationItem;
 class ControllerPanelDicomItem;
@@ -28,7 +32,7 @@ class ControllerPanelSphereItem;
 class ControllerPanel : public QWidget {
     Q_OBJECT
   public:
-    explicit ControllerPanel(QWidget* parent = nullptr);
+    explicit ControllerPanel(controllers::DicomController* dicomController, QWidget* parent = nullptr);
     ~ControllerPanel() override;
 
     void SetSeries(const QStringList& seriesNames);
@@ -72,6 +76,8 @@ class ControllerPanel : public QWidget {
     ControllerPanelFPSOverlayItem* m_fpsOverlayItem{nullptr};
     ControllerPanelOrientationMarkerItem* m_orientationMarkerItem{nullptr};
     ControllerPanelCornerAnnotationItem* m_cornerAnnotationItem{nullptr};
+
+    controllers::DicomController* m_dicomController{nullptr};
 };
 }  // namespace ui
 

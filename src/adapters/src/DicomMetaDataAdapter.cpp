@@ -4,6 +4,7 @@
 
 #include <vtkDICOMMetaData.h>
 #include <vtkDICOMReader.h>
+#include <vtkImageData.h>
 #include <vtkDICOMTag.h>
 
 #include "controllers/DicomController.hpp"

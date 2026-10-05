@@ -7,6 +7,7 @@
 #include <QWidget>
 
 class QTableView;
+class QLabel;
 
 namespace adapters {
 class DicomMetaDataAdapter;
@@ -36,6 +37,7 @@ class DicomMetaDataPanel : public QWidget {
 
     DicomMetaDataModel* m_model{nullptr};
     QTableView* m_tableView{nullptr};
+    QLabel* m_title{nullptr};
 };
 
 }  // namespace ui

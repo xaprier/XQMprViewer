@@ -13,10 +13,14 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "adapters/DicomMetaDataAdapter.hpp"
+#include "controllers/DicomController.hpp"
+#include "ui/DicomMetaDataPanel.hpp"
+
 namespace ui {
 
-ControllerPanelDicomItem::ControllerPanelDicomItem(QWidget* parent)
-    : QWidget(parent) {
+ControllerPanelDicomItem::ControllerPanelDicomItem(controllers::DicomController* dicomController, QWidget* parent)
+    : QWidget(parent), m_dicomController(dicomController) {
     _setupUi();
 }
 
@@ -92,10 +96,14 @@ void ControllerPanelDicomItem::_setupUi() {
     buttonLayout->addWidget(m_seriesToggleButton);
     buttonLayout->addStretch();
 
+    m_metaDataAdapter = new adapters::DicomMetaDataAdapter(m_dicomController, this);
+    m_metaDataPanel = new DicomMetaDataPanel(m_metaDataAdapter, this);
+
     form->addRow(buttonLayout);
     form->addRow(m_seriesList);
     form->addRow(tr("Selected Series:"), m_selectedLabel);
     form->addRow(m_loadButton);
+    form->addRow(m_metaDataPanel);
 
     auto* outer = new QVBoxLayout(this);
     outer->setContentsMargins(0, 0, 0, 0);

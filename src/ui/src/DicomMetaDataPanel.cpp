@@ -1,6 +1,7 @@
 #include "ui/DicomMetaDataPanel.hpp"
 
 #include <QHeaderView>
+#include <QLabel>
 #include <QTableView>
 #include <QVBoxLayout>
 
@@ -31,9 +32,12 @@ void DicomMetaDataPanel::_setupUi() {
     m_tableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
     m_tableView->setShowGrid(false);
 
+    m_title = new QLabel("Metadata", this);
+
     auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(4, 4, 4, 4);
     layout->setSpacing(4);
+    layout->addWidget(m_title);
     layout->addWidget(m_tableView);
 }
 
