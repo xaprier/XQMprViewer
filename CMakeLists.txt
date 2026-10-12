@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(
     XQMprViewer
-    VERSION 1.0.0
+    VERSION 1.0.1
     LANGUAGES C CXX
     DESCRIPTION "An open-source MPR DICOM viewer built with modern C++ architecture, Qt6, and VTK rendering."
     HOMEPAGE_URL "https://github.com/xaprier/XQMprViewer"
