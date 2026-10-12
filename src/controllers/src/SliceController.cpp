@@ -259,6 +259,11 @@ void SliceController::OnSphereUpdated(const Vec3& worldPos) {
         const int sliceIdx = static_cast<int>((worldPos[ax] - origin[ax]) / spacing[ax] + 0.5);
         const int clamped = std::max(m_rivs[i]->GetSliceMin(), std::min(m_rivs[i]->GetSliceMax(), sliceIdx));
         m_rivs[i]->SetSlice(clamped);
+
+        // SetSlice() narrows clipping to a few voxels around the image plane
+        // (InteractorStyle is null in viewport mode), clipping the sphere out.
+        if (auto* renderer = m_rivs[i]->GetRenderer())
+            renderer->ResetCameraClippingRange();
     }
 
     RenderAll();
